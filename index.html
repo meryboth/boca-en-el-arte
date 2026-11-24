@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museo Xeneize</title>
+<meta name="description" content="Un museo imaginario: pintura clásica vestida de azul y oro. Homenaje de hincha, no oficial.">
+<style>
+  :root { --azul:#103f79; --oro:#f3b229; --tinta:#f4f1ea; --sombra:#0b0d12; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:auto; }
+  body { margin:0; background:var(--sombra); color:var(--tinta); font:17px/1.5 Georgia, "Times New Roman", serif; }
+  #recorrido { position:relative; }
+  #escena { position:sticky; top:0; height:100vh; height:100dvh; overflow:hidden; background:#000; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  #intro { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:left center; transition:opacity .8s ease; }
+  #intro.fuera { opacity:0; pointer-events:none; }
+  .con-intro #portada { opacity:0; }
+  .velo { position:absolute; inset:0; background:linear-gradient(180deg, #0008 0%, #0000 22%, #0000 55%, #000b 100%); pointer-events:none; }
+  header { position:absolute; left:0; right:0; top:0; padding:18px 22px; display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+  header strong { font-size:1.05rem; letter-spacing:.14em; text-transform:uppercase; font-family:system-ui, sans-serif; font-weight:600; }
+  header span { font:13px system-ui, sans-serif; opacity:.8; }
+  #portada, #ficha { position:absolute; left:22px; right:22px; bottom:86px; max-width:560px; transition:opacity .45s ease, transform .45s ease; }
+  #portada h1 { font-size:clamp(2.2rem, 6vw, 4.2rem); line-height:1.02; margin:0 0 10px; font-weight:400; }
+  #portada h1 em { color:var(--oro); font-style:normal; }
+  #portada p, #ficha p { margin:0; max-width:46ch; text-shadow:0 1px 8px #000; }
+  #ficha { border-left:4px solid var(--oro); padding-left:16px; }
+  #ficha h2 { margin:0 0 2px; font-size:clamp(1.4rem, 3.4vw, 2.1rem); font-weight:400; line-height:1.1; }
+  #ficha .autor { font-style:italic; opacity:.92; }
+  .oculto { opacity:0; transform:translateY(10px); pointer-events:none; }
+  #cerca { margin-top:12px; font:600 14px system-ui, sans-serif; color:#1a1408; background:var(--oro); border:0; border-radius:999px; padding:9px 16px; cursor:pointer; }
+  #cerca:focus-visible { outline:3px solid var(--tinta); outline-offset:2px; }
+  dialog { border:0; padding:0; background:#000; max-width:100vw; max-height:100dvh; width:100vw; height:100dvh; overflow:auto; }
+  dialog::backdrop { background:#000e; }
+  dialog img { display:block; margin:0 auto; max-width:none; width:min(100%, 2600px); height:auto; cursor:zoom-in; }
+  dialog img.grande { width:max(180vw, 2600px); cursor:zoom-out; }
+  dialog button { position:fixed; top:14px; right:14px; font:600 14px system-ui, sans-serif; color:#fff; background:#0009; border:1px solid #fff6; border-radius:999px; padding:9px 16px; cursor:pointer; }
+  nav { position:absolute; left:22px; right:22px; bottom:22px; display:flex; gap:10px; align-items:center; }
+  nav button { font:600 14px system-ui, sans-serif; color:var(--tinta); background:#ffffff14; border:1px solid #ffffff40; border-radius:999px; padding:10px 18px; cursor:pointer; backdrop-filter:blur(6px); }
+  nav button:hover { background:#ffffff26; } nav button:disabled { opacity:.35; cursor:default; }
+  nav button:focus-visible { outline:3px solid var(--oro); outline-offset:2px; }
+  #puntos { display:flex; gap:7px; margin-left:auto; }
+  #puntos i { width:9px; height:9px; border-radius:50%; background:#ffffff55; display:block; }
+  #puntos i.activo { background:var(--oro); }
+  #carga { position:absolute; inset:auto 0 0 0; height:3px; background:var(--oro); transform-origin:left; transform:scaleX(0); transition:transform .2s linear, opacity .6s ease; }
+  footer { padding:56px 22px 70px; max-width:760px; margin:0 auto; font:15px/1.6 system-ui, sans-serif; color:#c9c5bb; }
+  footer h2 { font:400 1.5rem Georgia, serif; color:var(--tinta); margin:0 0 10px; }
+  footer a { color:var(--oro); }
+  @media (max-width:640px) { header span { display:none; } #portada, #ficha { bottom:92px; } }
+</style>
+</head>
+<body>
+<div id="recorrido">
+  <div id="escena">
+    <canvas id="lienzo" aria-label="Recorrido por la sala del museo"></canvas>
+    <video id="intro" class="fuera" muted playsinline preload="auto" aria-hidden="true"></video>
+    <div class="velo"></div>
+    <header><strong>Museo Xeneize</strong><span>Deslizá hacia abajo para recorrer la sala</span></header>
+    <section id="portada">
+      <h1>La pintura clásica, de <em>azul y oro</em></h1>
+      <p>Obras maestras con la ropa cambiada. Se entra por el túnel.</p>
+    </section>
+    <section id="ficha" class="oculto" aria-live="polite">
+      <h2 id="titulo"></h2><p class="autor" id="autor"></p><button id="cerca" hidden>Ver de cerca</button>
+    </section>
+    <nav aria-label="Paradas del recorrido">
+      <button id="ant">Anterior</button><button id="sig">Siguiente</button>
+      <div id="puntos" aria-hidden="true"></div>
+    </nav>
+    <div id="carga"></div>
+  </div>
+</div>
+<dialog id="visor" aria-label="Obra ampliada"><button id="cerrar">Cerrar</button><img id="visorimg" alt=""></dialog>
+<footer>
+  <h2>Sobre este museo</h2>
+  <p>Es un museo imaginario y un homenaje de hincha. No es oficial ni está afiliado al Club Atlético Boca Juniors. Las pinturas originales son de dominio público; acá aparecen intervenidas: solo se cambió el color de las telas.</p>
+</footer>
+
+<script>
+const DATA = {"frames": ["frames/f_0000.webp", "frames/f_0001.webp", "frames/f_0002.webp", "frames/f_0003.webp", "frames/f_0004.webp", "frames/f_0005.webp", "frames/f_0006.webp", "frames/f_0007.webp", "frames/f_0008.webp", "frames/f_0009.webp", "frames/f_0010.webp", "frames/f_0011.webp", "frames/f_0012.webp", "frames/f_0013.webp", "frames/f_0014.webp", "frames/f_0015.webp", "frames/f_0016.webp", "frames/f_0017.webp", "frames/f_0018.webp", "frames/f_0019.webp", "frames/f_0020.webp", "frames/f_0021.webp", "frames/f_0022.webp", "frames/f_0023.webp", "frames/f_0024.webp", "frames/f_0025.webp", "frames/f_0026.webp", "frames/f_0027.webp", "frames/f_0028.webp", "frames/f_0029.webp", "frames/f_0030.webp", "frames/f_0031.webp", "frames/f_0032.webp", "frames/f_0033.webp", "frames/f_0034.webp", "frames/f_0035.webp", "frames/f_0036.webp", "frames/f_0037.webp", "frames/f_0038.webp", "frames/f_0039.webp", "frames/f_0040.webp", "frames/f_0041.webp", "frames/f_0042.webp", "frames/f_0043.webp", "frames/f_0044.webp", "frames/f_0045.webp", "frames/f_0046.webp", "frames/f_0047.webp", "frames/f_0048.webp", "frames/f_0049.webp", "frames/f_0050.webp", "frames/f_0051.webp", "frames/f_0052.webp", "frames/f_0053.webp", "frames/f_0054.webp", "frames/f_0055.webp", "frames/f_0056.webp", "frames/f_0057.webp", "frames/f_0058.webp", "frames/f_0059.webp", "frames/f_0060.webp", "frames/f_0061.webp", "frames/f_0062.webp", "frames/f_0063.webp", "frames/f_0064.webp", "frames/f_0065.webp", "frames/f_0066.webp", "frames/f_0067.webp", "frames/f_0068.webp", "frames/f_0069.webp", "frames/f_0070.webp", "frames/f_0071.webp", "frames/f_0072.webp", "frames/f_0073.webp", "frames/f_0074.webp", "frames/f_0075.webp", "frames/f_0076.webp", "frames/f_0077.webp", "frames/f_0078.webp", "frames/f_0079.webp", "frames/f_0080.webp", "frames/f_0081.webp", "frames/f_0082.webp", "frames/f_0083.webp", "frames/f_0084.webp", "frames/f_0085.webp", "frames/f_0086.webp", "frames/f_0087.webp", "frames/f_0088.webp", "frames/f_0089.webp", "frames/f_0090.webp", "frames/f_0091.webp", "frames/f_0092.webp", "frames/f_0093.webp", "frames/f_0094.webp", "frames/f_0095.webp", "frames/f_0096.webp", "frames/f_0097.webp", "frames/f_0098.webp", "frames/f_0099.webp", "frames/f_0100.webp", "frames/f_0101.webp", "frames/f_0102.webp", "frames/f_0103.webp", "frames/f_0104.webp", "frames/f_0105.webp", "frames/f_0106.webp", "frames/f_0107.webp", "frames/f_0108.webp", "frames/f_0109.webp", "frames/f_0110.webp", "frames/f_0111.webp", "frames/f_0112.webp", "frames/f_0113.webp", "frames/f_0114.webp", "frames/f_0115.webp", "frames/f_0116.webp", "frames/f_0117.webp", "frames/f_0118.webp", "frames/f_0119.webp", "frames/f_0120.webp", "frames/f_0121.webp", "frames/f_0122.webp", "frames/f_0123.webp", "frames/f_0124.webp", "frames/f_0125.webp", "frames/f_0126.webp", "frames/f_0127.webp", "frames/f_0128.webp", "frames/f_0129.webp", "frames/f_0130.webp", "frames/f_0131.webp", "frames/f_0132.webp", "frames/f_0133.webp", "frames/f_0134.webp", "frames/f_0135.webp", "frames/f_0136.webp", "frames/f_0137.webp", "frames/f_0138.webp", "frames/f_0139.webp", "frames/f_0140.webp", "frames/f_0141.webp", "frames/f_0142.webp", "frames/f_0143.webp", "frames/f_0144.webp", "frames/f_0145.webp", "frames/f_0146.webp", "frames/f_0147.webp", "frames/f_0148.webp", "frames/f_0149.webp", "frames/f_0150.webp", "frames/f_0151.webp", "frames/f_0152.webp", "frames/f_0153.webp", "frames/f_0154.webp", "frames/f_0155.webp", "frames/f_0156.webp", "frames/f_0157.webp", "frames/f_0158.webp", "frames/f_0159.webp", "frames/f_0160.webp", "frames/f_0161.webp", "frames/f_0162.webp", "frames/f_0163.webp", "frames/f_0164.webp", "frames/f_0165.webp", "frames/f_0166.webp", "frames/f_0167.webp", "frames/f_0168.webp", "frames/f_0169.webp", "frames/f_0170.webp", "frames/f_0171.webp", "frames/f_0172.webp", "frames/f_0173.webp", "frames/f_0174.webp", "frames/f_0175.webp", "frames/f_0176.webp", "frames/f_0177.webp", "frames/f_0178.webp", "frames/f_0179.webp", "frames/f_0180.webp", "frames/f_0181.webp", "frames/f_0182.webp", "frames/f_0183.webp", "frames/f_0184.webp", "frames/f_0185.webp", "frames/f_0186.webp", "frames/f_0187.webp", "frames/f_0188.webp", "frames/f_0189.webp", "frames/f_0190.webp", "frames/f_0191.webp", "frames/f_0192.webp", "frames/f_0193.webp", "frames/f_0194.webp", "frames/f_0195.webp", "frames/f_0196.webp", "frames/f_0197.webp", "frames/f_0198.webp", "frames/f_0199.webp", "frames/f_0200.webp", "frames/f_0201.webp", "frames/f_0202.webp", "frames/f_0203.webp", "frames/f_0204.webp", "frames/f_0205.webp", "frames/f_0206.webp", "frames/f_0207.webp", "frames/f_0208.webp", "frames/f_0209.webp", "frames/f_0210.webp", "frames/f_0211.webp", "frames/f_0212.webp", "frames/f_0213.webp", "frames/f_0214.webp", "frames/f_0215.webp", "frames/f_0216.webp", "frames/f_0217.webp", "frames/f_0218.webp", "frames/f_0219.webp", "frames/f_0220.webp", "frames/f_0221.webp", "frames/f_0222.webp", "frames/f_0223.webp", "frames/f_0224.webp", "frames/f_0225.webp", "frames/f_0226.webp", "frames/f_0227.webp", "frames/f_0228.webp", "frames/f_0229.webp", "frames/f_0230.webp", "frames/f_0231.webp", "frames/f_0232.webp", "frames/f_0233.webp", "frames/f_0234.webp", "frames/f_0235.webp", "frames/f_0236.webp", "frames/f_0237.webp", "frames/f_0238.webp", "frames/f_0239.webp", "frames/f_0240.webp", "frames/f_0241.webp", "frames/f_0242.webp", "frames/f_0243.webp", "frames/f_0244.webp", "frames/f_0245.webp", "frames/f_0246.webp", "frames/f_0247.webp", "frames/f_0248.webp", "frames/f_0249.webp", "frames/f_0250.webp", "frames/f_0251.webp", "frames/f_0252.webp", "frames/f_0253.webp", "frames/f_0254.webp", "frames/f_0255.webp", "frames/f_0256.webp", "frames/f_0257.webp", "frames/f_0258.webp", "frames/f_0259.webp", "frames/f_0260.webp", "frames/f_0261.webp", "frames/f_0262.webp", "frames/f_0263.webp", "frames/f_0264.webp", "frames/f_0265.webp", "frames/f_0266.webp", "frames/f_0267.webp", "frames/f_0268.webp", "frames/f_0269.webp", "frames/f_0270.webp", "frames/f_0271.webp", "frames/f_0272.webp", "frames/f_0273.webp", "frames/f_0274.webp", "frames/f_0275.webp", "frames/f_0276.webp", "frames/f_0277.webp", "frames/f_0278.webp", "frames/f_0279.webp", "frames/f_0280.webp", "frames/f_0281.webp", "frames/f_0282.webp", "frames/f_0283.webp", "frames/f_0284.webp", "frames/f_0285.webp", "frames/f_0286.webp", "frames/f_0287.webp", "frames/f_0288.webp", "frames/f_0289.webp", "frames/f_0290.webp", "frames/f_0291.webp", "frames/f_0292.webp", "frames/f_0293.webp", "frames/f_0294.webp", "frames/f_0295.webp", "frames/f_0296.webp", "frames/f_0297.webp", "frames/f_0298.webp", "frames/f_0299.webp", "frames/f_0300.webp", "frames/f_0301.webp", "frames/f_0302.webp", "frames/f_0303.webp", "frames/f_0304.webp", "frames/f_0305.webp", "frames/f_0306.webp", "frames/f_0307.webp", "frames/f_0308.webp", "frames/f_0309.webp", "frames/f_0310.webp", "frames/f_0311.webp", "frames/f_0312.webp", "frames/f_0313.webp", "frames/f_0314.webp", "frames/f_0315.webp", "frames/f_0316.webp", "frames/f_0317.webp", "frames/f_0318.webp", "frames/f_0319.webp", "frames/f_0320.webp", "frames/f_0321.webp", "frames/f_0322.webp", "frames/f_0323.webp", "frames/f_0324.webp", "frames/f_0325.webp", "frames/f_0326.webp", "frames/f_0327.webp", "frames/f_0328.webp", "frames/f_0329.webp", "frames/f_0330.webp", "frames/f_0331.webp", "frames/f_0332.webp", "frames/f_0333.webp", "frames/f_0334.webp", "frames/f_0335.webp", "frames/f_0336.webp", "frames/f_0337.webp", "frames/f_0338.webp", "frames/f_0339.webp", "frames/f_0340.webp", "frames/f_0341.webp", "frames/f_0342.webp", "frames/f_0343.webp", "frames/f_0344.webp", "frames/f_0345.webp", "frames/f_0346.webp", "frames/f_0347.webp", "frames/f_0348.webp", "frames/f_0349.webp", "frames/f_0350.webp", "frames/f_0351.webp", "frames/f_0352.webp", "frames/f_0353.webp", "frames/f_0354.webp", "frames/f_0355.webp", "frames/f_0356.webp", "frames/f_0357.webp", "frames/f_0358.webp", "frames/f_0359.webp", "frames/f_0360.webp", "frames/f_0361.webp", "frames/f_0362.webp", "frames/f_0363.webp", "frames/f_0364.webp", "frames/f_0365.webp", "frames/f_0366.webp", "frames/f_0367.webp", "frames/f_0368.webp", "frames/f_0369.webp", "frames/f_0370.webp", "frames/f_0371.webp", "frames/f_0372.webp", "frames/f_0373.webp", "frames/f_0374.webp", "frames/f_0375.webp", "frames/f_0376.webp", "frames/f_0377.webp", "frames/f_0378.webp", "frames/f_0379.webp", "frames/f_0380.webp", "frames/f_0381.webp", "frames/f_0382.webp", "frames/f_0383.webp", "frames/f_0384.webp", "frames/f_0385.webp", "frames/f_0386.webp", "frames/f_0387.webp", "frames/f_0388.webp", "frames/f_0389.webp", "frames/f_0390.webp", "frames/f_0391.webp", "frames/f_0392.webp", "frames/f_0393.webp", "frames/f_0394.webp", "frames/f_0395.webp", "frames/f_0396.webp", "frames/f_0397.webp", "frames/f_0398.webp", "frames/f_0399.webp", "frames/f_0400.webp", "frames/f_0401.webp", "frames/f_0402.webp", "frames/f_0403.webp", "frames/f_0404.webp", "frames/f_0405.webp", "frames/f_0406.webp", "frames/f_0407.webp", "frames/f_0408.webp", "frames/f_0409.webp", "frames/f_0410.webp", "frames/f_0411.webp", "frames/f_0412.webp", "frames/f_0413.webp", "frames/f_0414.webp", "frames/f_0415.webp", "frames/f_0416.webp", "frames/f_0417.webp", "frames/f_0418.webp", "frames/f_0419.webp", "frames/f_0420.webp", "frames/f_0421.webp", "frames/f_0422.webp", "frames/f_0423.webp", "frames/f_0424.webp", "frames/f_0425.webp", "frames/f_0426.webp", "frames/f_0427.webp", "frames/f_0428.webp", "frames/f_0429.webp", "frames/f_0430.webp", "frames/f_0431.webp", "frames/f_0432.webp", "frames/f_0433.webp", "frames/f_0434.webp", "frames/f_0435.webp", "frames/f_0436.webp", "frames/f_0437.webp", "frames/f_0438.webp", "frames/f_0439.webp", "frames/f_0440.webp", "frames/f_0441.webp", "frames/f_0442.webp", "frames/f_0443.webp", "frames/f_0444.webp", "frames/f_0445.webp", "frames/f_0446.webp", "frames/f_0447.webp", "frames/f_0448.webp", "frames/f_0449.webp", "frames/f_0450.webp", "frames/f_0451.webp", "frames/f_0452.webp", "frames/f_0453.webp", "frames/f_0454.webp", "frames/f_0455.webp", "frames/f_0456.webp", "frames/f_0457.webp", "frames/f_0458.webp", "frames/f_0459.webp", "frames/f_0460.webp", "frames/f_0461.webp", "frames/f_0462.webp", "frames/f_0463.webp", "frames/f_0464.webp", "frames/f_0465.webp", "frames/f_0466.webp", "frames/f_0467.webp", "frames/f_0468.webp", "frames/f_0469.webp", "frames/f_0470.webp", "frames/f_0471.webp", "frames/f_0472.webp", "frames/f_0473.webp", "frames/f_0474.webp", "frames/f_0475.webp", "frames/f_0476.webp", "frames/f_0477.webp", "frames/f_0478.webp", "frames/f_0479.webp", "frames/f_0480.webp", "frames/f_0481.webp", "frames/f_0482.webp", "frames/f_0483.webp", "frames/f_0484.webp", "frames/f_0485.webp", "frames/f_0486.webp", "frames/f_0487.webp", "frames/f_0488.webp", "frames/f_0489.webp", "frames/f_0490.webp", "frames/f_0491.webp", "frames/f_0492.webp", "frames/f_0493.webp", "frames/f_0494.webp", "frames/f_0495.webp", "frames/f_0496.webp", "frames/f_0497.webp", "frames/f_0498.webp", "frames/f_0499.webp", "frames/f_0500.webp", "frames/f_0501.webp", "frames/f_0502.webp", "frames/f_0503.webp", "frames/f_0504.webp", "frames/f_0505.webp", "frames/f_0506.webp", "frames/f_0507.webp", "frames/f_0508.webp", "frames/f_0509.webp", "frames/f_0510.webp", "frames/f_0511.webp", "frames/f_0512.webp", "frames/f_0513.webp", "frames/f_0514.webp", "frames/f_0515.webp", "frames/f_0516.webp", "frames/f_0517.webp", "frames/f_0518.webp", "frames/f_0519.webp", "frames/f_0520.webp", "frames/f_0521.webp", "frames/f_0522.webp", "frames/f_0523.webp", "frames/f_0524.webp", "frames/f_0525.webp", "frames/f_0526.webp", "frames/f_0527.webp", "frames/f_0528.webp", "frames/f_0529.webp", "frames/f_0530.webp", "frames/f_0531.webp", "frames/f_0532.webp", "frames/f_0533.webp", "frames/f_0534.webp", "frames/f_0535.webp", "frames/f_0536.webp", "frames/f_0537.webp", "frames/f_0538.webp", "frames/f_0539.webp", "frames/f_0540.webp"], "paradas": [{"id": "tunel", "in": 0, "out": 12, "still": "paradas/p_00.webp"}, {"id": "entrada", "in": 44, "out": 56, "still": "paradas/p_01.webp"}, {"id": "im6647", "in": 88, "out": 100, "titulo": "Madonna del Prato", "autor": "Rafael, 1505–06", "still": "paradas/p_02.webp", "obra": "obras/o_02.webp"}, {"id": "im3825", "in": 132, "out": 144, "titulo": "Matrimonio Arnolfini", "autor": "Jan van Eyck, 1434", "still": "paradas/p_03.webp", "obra": "obras/o_03.webp"}, {"id": "im2153", "in": 176, "out": 188, "titulo": "Baco y Ariadna", "autor": "Tiziano, 1520–23", "still": "paradas/p_04.webp", "obra": "obras/o_04.webp"}, {"id": "julio2__hybrid-a__sin-sillon", "in": 220, "out": 232, "titulo": "Retrato de Julio II", "autor": "Rafael, 1511", "still": "paradas/p_05.webp", "obra": "obras/o_05.webp"}, {"id": "armino__auto-hybrid__m1", "in": 264, "out": 276, "titulo": "La dama del armiño", "autor": "Leonardo da Vinci, c. 1490", "still": "paradas/p_06.webp", "obra": "obras/o_06.webp"}, {"id": "enrique8__auto-hybrid__m1", "in": 308, "out": 320, "titulo": "Enrique VIII", "autor": "Taller de Hans Holbein el Joven, c. 1540–47", "still": "paradas/p_07.webp", "obra": "obras/o_07.webp"}, {"id": "castiglione__auto-hybrid__m1", "in": 352, "out": 364, "titulo": "Retrato de Baltasar Castiglione", "autor": "Rafael, c. 1515", "still": "paradas/p_08.webp", "obra": "obras/o_08.webp"}, {"id": "eleonora__auto-hybrid__m1", "in": 396, "out": 408, "titulo": "Eleonora de Toledo con su hijo", "autor": "Bronzino, c. 1545", "still": "paradas/p_09.webp", "obra": "obras/o_09.webp"}, {"id": "embajadores__auto-hybrid__m1", "in": 440, "out": 452, "titulo": "Los embajadores", "autor": "Hans Holbein el Joven, 1533", "still": "paradas/p_10.webp", "obra": "obras/o_10.webp"}, {"id": "maqueta", "in": 484, "out": 496, "titulo": "La Bombonera", "autor": "Maqueta", "still": "paradas/p_11.webp"}, {"id": "im2193", "in": 528, "out": 540, "titulo": "La escuela de Atenas", "autor": "Rafael, 1509–11", "still": "paradas/p_12.webp", "obra": "obras/o_12.webp"}], "intro": "intro.mp4"};
+const N = DATA.frames.length, cv = document.getElementById('lienzo'), cx = cv.getContext('2d');
+const imgs = new Array(N), stills = [], $ = id => document.getElementById(id);
+const rec = $('recorrido'), VH_PER_STOP = 1.6;
+let cur = -1, want = 0, loaded = 0;
+
+function size() {
+  const d = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.round(cv.clientWidth * d); cv.height = Math.round(cv.clientHeight * d); cur = -1; draw();
+}
+function nearest(i) {                         // closest frame already loaded, so scrolling never shows a hole
+  for (let k = 0; k < N; k++) { if (imgs[i - k] && imgs[i - k].ok) return imgs[i - k]; if (imgs[i + k] && imgs[i + k].ok) return imgs[i + k]; }
+  return null;
+}
+function draw() {
+  const st = stopAt(want), hi = st >= 0 ? stills[st] : null;      // standing at a stop: use its sharp picture
+  const im = hi && hi.ok ? hi : nearest(want); if (!im) return;
+  if (im.idx === cur) return; cur = im.idx;
+  const s = Math.max(cv.width / im.naturalWidth, cv.height / im.naturalHeight);
+  const w = im.naturalWidth * s, h = im.naturalHeight * s;
+  cx.drawImage(im, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+}
+function load(i) {
+  if (imgs[i]) return; const im = new Image(); im.idx = i; imgs[i] = im;
+  im.onload = () => { im.ok = true; loaded++; $('carga').style.transform = 'scaleX(' + loaded / N + ')'; if (loaded === N) $('carga').style.opacity = 0; if (Math.abs(i - want) < 3) { cur = -1; draw(); } };
+  im.src = DATA.frames[i];
+}
+function progress() {
+  const max = rec.offsetHeight - window.innerHeight;
+  return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+}
+function anchor(k) { const p = DATA.paradas[k]; return k === 0 ? p.in : (p.in + p.out) / 2; }
+function stopAt(i) { return DATA.paradas.findIndex(p => i >= p.in && i <= p.out); }
+function update() {
+  want = Math.round(progress() * (N - 1)); draw();
+  if (want > 0) { endIntro(); loadAll(); }
+  const s = stopAt(want), p = s >= 0 ? DATA.paradas[s] : null;
+  $('portada').classList.toggle('oculto', want > DATA.paradas[0].out);
+  const show = p && p.titulo;
+  if (show) { $('titulo').textContent = p.titulo; $('autor').textContent = p.autor; $('cerca').hidden = !p.obra; $('cerca').dataset.src = p.obra || ''; }
+  $('ficha').classList.toggle('oculto', !show);
+  const near = nearestStop();
+  document.querySelectorAll('#puntos i').forEach((d, k) => d.classList.toggle('activo', k === near));
+  $('ant').disabled = near === 0 && want <= DATA.paradas[0].out; $('sig').disabled = near === DATA.paradas.length - 1;
+}
+function nearestStop() {
+  let best = 0, bd = 1e9;
+  DATA.paradas.forEach((p, k) => { const d = Math.abs(anchor(k) - want); if (d < bd) { bd = d; best = k; } });
+  return best;
+}
+function go(k) {
+  k = Math.max(0, Math.min(DATA.paradas.length - 1, k));
+  const f = anchor(k), max = rec.offsetHeight - window.innerHeight;
+  window.scrollTo({ top: f / (N - 1) * max, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}
+rec.style.height = (DATA.paradas.length * VH_PER_STOP * 100 + 100) + 'vh';
+DATA.paradas.forEach(() => $('puntos').appendChild(document.createElement('i')));
+$('ant').onclick = () => { const n = nearestStop(); go(want > anchor(n) + 2 ? n : n - 1); };
+$('sig').onclick = () => { const n = nearestStop(); go(want < anchor(n) - 2 ? n : n + 1); };
+addEventListener('keydown', e => { if (e.key === 'ArrowRight') $('sig').click(); if (e.key === 'ArrowLeft') $('ant').click(); });
+addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+addEventListener('resize', size);
+// first the stops, then a coarse pass, then everything: the walk is usable long before it is fully loaded
+const order = [...new Set([0, ...DATA.paradas.map(p => Math.round((p.in + p.out) / 2)), ...Array.from({ length: Math.ceil(N / 8) }, (_, k) => k * 8), ...Array.from({ length: N }, (_, k) => k)])];
+const loadAll = () => { if (!loadAll.done) { loadAll.done = true; order.forEach(load); } };
+load(0);
+DATA.paradas.forEach((p, k) => { if (!p.still) return; const im = new Image(); im.idx = 100000 + k; stills[k] = im; im.onload = () => { im.ok = true; cur = -1; draw(); }; im.src = p.still; });
+$('cerca').onclick = () => { $('visorimg').src = $('cerca').dataset.src; $('visorimg').alt = $('titulo').textContent; $('visorimg').classList.remove('grande'); $('visor').showModal(); };
+$('cerrar').onclick = () => $('visor').close();
+$('visorimg').onclick = () => $('visorimg').classList.toggle('grande');
+// entrance clip: plays once over the first frame, on landscape screens only (its title is part of the picture)
+const vid = $('intro');
+function endIntro() { vid.classList.add('fuera'); document.body.classList.remove('con-intro'); if (!vid.paused) vid.pause(); }
+if (DATA.intro && innerWidth >= innerHeight && scrollY < 4 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.body.classList.add('con-intro');          // the clip carries the title: keep the cover text out from the start
+  vid.onplaying = () => { if (want === 0) vid.classList.remove('fuera'); loadAll(); };
+  vid.onended = vid.onerror = () => { endIntro(); loadAll(); };
+  vid.src = DATA.intro; vid.play().catch(() => { endIntro(); loadAll(); });
+  setTimeout(loadAll, 4000);                         // the clip goes first on the wire; the frames wait for it, but not for long
+} else loadAll();
+size(); update();
+</script>
+</body>
+</html>
