@@ -4,6 +4,14 @@ Un museo imaginario: diez pinturas clásicas con la ropa repintada de azul y oro
 
 **Verlo:** https://meryboth.github.io/boca-en-el-arte/
 
+![Las obras, antes y después de la intervención](readme/antes-despues.gif)
+
+*Seis de las diez obras: el original y la versión que cuelga en la sala.*
+
+![El recorrido de la sala](readme/recorrido.gif)
+
+*El recorrido completo, acelerado. En el sitio avanza con el scroll.*
+
 **Proyecto no oficial.** No tiene relación con ningún club. No usa escudos, marcas, sponsors ni nombres de jugadores.
 
 Este repo contiene solo el sitio ya construido. Abajo está el resumen técnico de la investigación que lo produjo.
@@ -37,6 +45,8 @@ Máquina: Ryzen 9 4900HS, RTX 2060 Max-Q (6 GB), 15,4 GB de RAM, Windows 11. Tod
 
 El primer piloto hizo que el modelo de lenguaje dibujara una pintura "renacentista" entera por código. No era realista ni lo buscado, y el protocolo se reescribió con una pregunta más acotada: dada una pintura real, ¿quién debe cambiar la ropa?
 
+![El piloto descartado: una obra entera dibujada por código](readme/01_piloto-por-codigo.jpg)
+
 **Tres métodos** sobre el mismo archivo fuente (lado largo 4.500 px):
 
 | Condición | Quién pinta | Itera | Costo por imagen (mediana) |
@@ -47,11 +57,19 @@ El primer piloto hizo que el modelo de lenguaje dibujara una pintura "renacentis
 
 **Diseño:** 4 pinturas × 3 métodos × 5 semillas = 60 corridas. Una quinta pintura se usó solo para desarrollar el script. Regla fija: se tocan solo telas, no sillas ni objetos.
 
+![La pintura de calibración con los tres métodos](readme/02_tres-metodos-julio2.jpg)
+
+*De izquierda a derecha: original, código, modelo de imagen solo y dos variantes del combinado.*
+
 **Métricas automáticas**, sobre parches chicos definidos antes de correr:
 
 - **Alteración:** mediana CIEDE2000 contra el original en caras, manos y fondo. Más bajo es mejor.
 - **Error de matiz:** distancia en grados al azul u oro buscado, en la ropa. Más bajo es mejor.
 - **Pliegues:** correlación de la luminosidad con el original, en la ropa. Más alto es mejor.
+
+![Zonas de medición](readme/03_zonas-de-medicion.jpg)
+
+*Verde: zonas que no deben cambiar. Magenta: ropa.*
 
 | Las cuatro pinturas, n = 20 | `edit` | `code` | `hybrid` |
 |---|---|---|---|
@@ -79,6 +97,14 @@ El primer piloto hizo que el modelo de lenguaje dibujara una pintura "renacentis
 - Que `code` y `hybrid` den ~0 de alteración es por construcción (copian el original fuera de la máscara), no un hallazgo.
 - Una de las hipótesis del protocolo (si la clave de color importa) no se probó: la ablación se canceló por presupuesto.
 
+![Matrimonio Arnolfini: los tres métodos](readme/04_arnolfini-tres-metodos.jpg)
+
+*Pocas prendas grandes: acá la evaluadora prefirió al modelo de imagen en todos los pares.*
+
+![La escuela de Atenas: los tres métodos](readme/05_atenas-tres-metodos.jpg)
+
+*Muchas figuras: acá prefirió al código en todos los pares.*
+
 ### Qué cuelga en el museo
 
 | Obra | Método |
@@ -90,7 +116,15 @@ El primer piloto hizo que el modelo de lenguaje dibujara una pintura "renacentis
 
 La variante de máscara automática (la máscara sale de dónde el modelo cambió el matiz) **no se midió ni se evaluó**: está en la sala porque se quisieron más obras. Enrique VIII reemplazó a la Gioconda, cuyo vestido ya era oscuro y casi no mostraba la intervención.
 
+![Enrique VIII: original, resultado y zona pegada](readme/06_enrique8-mascara.jpg)
+
+*Máscara automática: en blanco, la zona del resultado del modelo que se pega sobre el original.*
+
 ## Tesseract
+
+![El teaser de la portada](readme/teaser.gif)
+
+*El teaser, renderizado con path tracing. Acá a menor resolución y sin la calidad del video original.*
 
 - La sala se arma en Blender; Tesseract renderiza el video. Al importar el `.blend` se perdieron las luces de área, los materiales procedurales y la restricción de cámara; las luces se rehicieron en watts.
 - El path tracer se quedaba sin memoria en la placa de 6 GB hasta bajar todas las texturas a 1.280 px.
@@ -121,6 +155,10 @@ La variante de máscara automática (la máscara sale de dónde el modelo cambi�
 - Para un edificio, la imagen a 3D no dio un modelo usable: sirvió como instrumento de medición.
 - Fallas registradas: el recorte automático de las fotos falló en 5 de 7; la normalización de vistas dio una buena de tres; 2 de 5 corridas 3D fallaron por errores al armar el grafo; un servicio agregó un escudo y una marca que no se habían pedido, y se taparon.
 - Con un objeto, una corrida por camino y una persona juzgando, no se puede decir qué servicio de imagen a 3D es mejor.
+
+![La maqueta aceptada, modelada desde la ficha de medidas](readme/07_maqueta-limpia.jpg)
+
+![La maqueta sobre la mesa, al final de la sala](readme/08_maqueta-en-sala.jpg)
 
 ## Costos
 
@@ -155,6 +193,7 @@ Los créditos son la cifra de Comfy Cloud por trabajo, no un monto facturado. No
 - `paradas/` — una imagen de alta resolución por cada obra.
 - `obras/` — las obras solas, para verlas en grande.
 - `intro.mp4` — el teaser de la portada (sin sonido).
+- `readme/` — las imágenes y los GIFs de este README; el sitio no los usa.
 
 Es un sitio estático: no hay que instalar ni compilar nada. Para verlo en local:
 
