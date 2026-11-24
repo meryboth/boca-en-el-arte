@@ -120,3 +120,14 @@ proyecto queda en su máquina como referencia para la nota de research del portf
   un escudo que no revisé si quedó tapado en esa hoja). El GIF de antes/después se arma con las fuentes de
   `research/sources/` y las obras del sitio; los otros dos con ffmpeg.
 - Mismo día: Marilyn pidió sacar del README público la imagen del piloto por código ("era horrible y encima no era lo que yo pedí"). Se quitó de `museo/readme/` y del README; el original sigue en `research/proceso/01_piloto-obra-por-codigo.jpg` y la imagen queda en el historial de commits del repo público.
+- Mismo día: Marilyn pidió subir también el proceso, en una carpeta aparte que no afecte el deploy. `publicar_sitio.sh`
+  ahora agrega `proceso/` (394 archivos, unos 87 MB): `research/`, `comfy/`, `scripts/`, esta bitácora, `seleccion.json`
+  y las imágenes fijas de la sala, con la misma estructura de carpetas para que los enlaces relativos sigan andando.
+  Los scripts los sumé yo sin que los pidiera, porque el informe los cita.
+- Fuera de `proceso/`, a propósito: lo que git ya ignora (imágenes a resolución completa, `.blend`, respuestas de la
+  evaluación), los modelos 3D, las fotos aéreas con sus recortes y vistas, y todo lo del piloto por código (`outputs/`,
+  `proceso/01`, `briefs/adan.md`). Las bitácoras siguen mencionando esos archivos; el `README.md` de la carpeta lo avisa.
+- Al informe se le quitaron dos imágenes que apuntaban a archivos no publicados (el piloto y la hoja de fotos aéreas).
+- Se agregó `.nojekyll` en la raíz: Pages sirve los archivos tal cual y no procesa los `.md` del proceso.
+- Pages sirve todo el repo, así que `proceso/` también queda accesible bajo la dirección del sitio; la página no lo enlaza.
+  Los archivos del sitio no cambiaron respecto del commit anterior (diff vacío).

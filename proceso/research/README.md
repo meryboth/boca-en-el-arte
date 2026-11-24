@@ -5,9 +5,9 @@ Resume qué se hizo, con qué, qué salió y qué no se puede afirmar. Cada núm
 `report.md`, que se genera desde los datos; si alguno no coincide, vale `report.md`.
 
 - **Sitio publicado:** https://meryboth.github.io/boca-en-el-arte/
-- **Repo público (solo el sitio):** https://github.com/meryboth/boca-en-el-arte
+- **Repo público (sitio en la raíz, proceso en `proceso/`):** https://github.com/meryboth/boca-en-el-arte
 - **Informe completo, en inglés:** `report.md` (no editarlo a mano: sale de `report.template.md`)
-- **Este proyecto en disco:** `C:\Users\mboth\OneDrive\Desktop\teserract` — no tiene remoto; todo lo que no es el sitio existe solo acá.
+- **Dónde está todo:** el registro del proceso está en la carpeta `proceso/` del repo público desde el 2026-11-24. Las imágenes a resolución completa, los archivos de Blender y los modelos 3D están solo en el disco donde se trabajó.
 
 Fechas registradas: commits del 2026-11-16 y 2026-11-17 (protocolo y evaluación), bitácoras del 2026-11-18 al 2026-11-24. No hay una fecha de inicio anotada. Proyecto no oficial: sin escudo, sin sponsors, sin nombres de jugadores.
 
