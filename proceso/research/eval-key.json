@@ -1,0 +1,726 @@
+{
+ "images": {
+  "im3386": {
+   "case": "prato",
+   "condition": "code",
+   "seed": 1,
+   "source": "research/runs/code/prato__code__s1__r3.jpg"
+  },
+  "im1399": {
+   "case": "prato",
+   "condition": "edit",
+   "seed": 1,
+   "source": "research/runs/edit/prato__edit__s1.png"
+  },
+  "im4838": {
+   "case": "prato",
+   "condition": "hybrid",
+   "seed": 1,
+   "source": "research/runs/hybrid/prato__hybrid__s1.jpg"
+  },
+  "im4314": {
+   "case": "prato",
+   "condition": "code",
+   "seed": 2,
+   "source": "research/runs/code/prato__code__s2__r4.jpg"
+  },
+  "im4522": {
+   "case": "prato",
+   "condition": "edit",
+   "seed": 2,
+   "source": "research/runs/edit/prato__edit__s2.png"
+  },
+  "im6626": {
+   "case": "prato",
+   "condition": "hybrid",
+   "seed": 2,
+   "source": "research/runs/hybrid/prato__hybrid__s2.jpg"
+  },
+  "im5927": {
+   "case": "prato",
+   "condition": "code",
+   "seed": 3,
+   "source": "research/runs/code/prato__code__s3__r4.jpg"
+  },
+  "im4547": {
+   "case": "prato",
+   "condition": "edit",
+   "seed": 3,
+   "source": "research/runs/edit/prato__edit__s3.png"
+  },
+  "im6647": {
+   "case": "prato",
+   "condition": "hybrid",
+   "seed": 3,
+   "source": "research/runs/hybrid/prato__hybrid__s3.jpg"
+  },
+  "im8619": {
+   "case": "prato",
+   "condition": "code",
+   "seed": 4,
+   "source": "research/runs/code/prato__code__s4__r3.jpg"
+  },
+  "im1995": {
+   "case": "prato",
+   "condition": "edit",
+   "seed": 4,
+   "source": "research/runs/edit/prato__edit__s4.png"
+  },
+  "im1177": {
+   "case": "prato",
+   "condition": "hybrid",
+   "seed": 4,
+   "source": "research/runs/hybrid/prato__hybrid__s4.jpg"
+  },
+  "im6793": {
+   "case": "prato",
+   "condition": "code",
+   "seed": 5,
+   "source": "research/runs/code/prato__code__s5__r4.jpg"
+  },
+  "im5805": {
+   "case": "prato",
+   "condition": "edit",
+   "seed": 5,
+   "source": "research/runs/edit/prato__edit__s5.png"
+  },
+  "im5660": {
+   "case": "prato",
+   "condition": "hybrid",
+   "seed": 5,
+   "source": "research/runs/hybrid/prato__hybrid__s5.jpg"
+  },
+  "im8890": {
+   "case": "arnolfini",
+   "condition": "code",
+   "seed": 1,
+   "source": "research/runs/code/arnolfini__code__s1__r4.jpg"
+  },
+  "im2939": {
+   "case": "arnolfini",
+   "condition": "edit",
+   "seed": 1,
+   "source": "research/runs/edit/arnolfini__edit__s1.png"
+  },
+  "im9345": {
+   "case": "arnolfini",
+   "condition": "hybrid",
+   "seed": 1,
+   "source": "research/runs/hybrid/arnolfini__hybrid__s1.jpg"
+  },
+  "im7537": {
+   "case": "arnolfini",
+   "condition": "code",
+   "seed": 2,
+   "source": "research/runs/code/arnolfini__code__s2__r3.jpg"
+  },
+  "im8716": {
+   "case": "arnolfini",
+   "condition": "edit",
+   "seed": 2,
+   "source": "research/runs/edit/arnolfini__edit__s2.png"
+  },
+  "im3825": {
+   "case": "arnolfini",
+   "condition": "hybrid",
+   "seed": 2,
+   "source": "research/runs/hybrid/arnolfini__hybrid__s2.jpg"
+  },
+  "im3106": {
+   "case": "arnolfini",
+   "condition": "code",
+   "seed": 3,
+   "source": "research/runs/code/arnolfini__code__s3__r3.jpg"
+  },
+  "im5943": {
+   "case": "arnolfini",
+   "condition": "edit",
+   "seed": 3,
+   "source": "research/runs/edit/arnolfini__edit__s3.png"
+  },
+  "im9816": {
+   "case": "arnolfini",
+   "condition": "hybrid",
+   "seed": 3,
+   "source": "research/runs/hybrid/arnolfini__hybrid__s3.jpg"
+  },
+  "im9879": {
+   "case": "arnolfini",
+   "condition": "code",
+   "seed": 4,
+   "source": "research/runs/code/arnolfini__code__s4__r4.jpg"
+  },
+  "im3209": {
+   "case": "arnolfini",
+   "condition": "edit",
+   "seed": 4,
+   "source": "research/runs/edit/arnolfini__edit__s4.png"
+  },
+  "im4853": {
+   "case": "arnolfini",
+   "condition": "hybrid",
+   "seed": 4,
+   "source": "research/runs/hybrid/arnolfini__hybrid__s4.jpg"
+  },
+  "im3709": {
+   "case": "arnolfini",
+   "condition": "code",
+   "seed": 5,
+   "source": "research/runs/code/arnolfini__code__s5__r4.jpg"
+  },
+  "im4178": {
+   "case": "arnolfini",
+   "condition": "edit",
+   "seed": 5,
+   "source": "research/runs/edit/arnolfini__edit__s5.png"
+  },
+  "im9756": {
+   "case": "arnolfini",
+   "condition": "hybrid",
+   "seed": 5,
+   "source": "research/runs/hybrid/arnolfini__hybrid__s5.jpg"
+  },
+  "im2588": {
+   "case": "baco",
+   "condition": "code",
+   "seed": 1,
+   "source": "research/runs/code/baco__code__s1__r4.jpg"
+  },
+  "im3064": {
+   "case": "baco",
+   "condition": "edit",
+   "seed": 1,
+   "source": "research/runs/edit/baco__edit__s1.png"
+  },
+  "im2153": {
+   "case": "baco",
+   "condition": "hybrid",
+   "seed": 1,
+   "source": "research/runs/hybrid/baco__hybrid__s1.jpg"
+  },
+  "im2265": {
+   "case": "baco",
+   "condition": "code",
+   "seed": 2,
+   "source": "research/runs/code/baco__code__s2__r2.jpg"
+  },
+  "im2433": {
+   "case": "baco",
+   "condition": "edit",
+   "seed": 2,
+   "source": "research/runs/edit/baco__edit__s2.png"
+  },
+  "im2940": {
+   "case": "baco",
+   "condition": "hybrid",
+   "seed": 2,
+   "source": "research/runs/hybrid/baco__hybrid__s2.jpg"
+  },
+  "im3175": {
+   "case": "baco",
+   "condition": "code",
+   "seed": 3,
+   "source": "research/runs/code/baco__code__s3__r4.jpg"
+  },
+  "im9306": {
+   "case": "baco",
+   "condition": "edit",
+   "seed": 3,
+   "source": "research/runs/edit/baco__edit__s3.png"
+  },
+  "im3879": {
+   "case": "baco",
+   "condition": "hybrid",
+   "seed": 3,
+   "source": "research/runs/hybrid/baco__hybrid__s3.jpg"
+  },
+  "im2973": {
+   "case": "baco",
+   "condition": "code",
+   "seed": 4,
+   "source": "research/runs/code/baco__code__s4__r3.jpg"
+  },
+  "im5844": {
+   "case": "baco",
+   "condition": "edit",
+   "seed": 4,
+   "source": "research/runs/edit/baco__edit__s4.png"
+  },
+  "im3705": {
+   "case": "baco",
+   "condition": "hybrid",
+   "seed": 4,
+   "source": "research/runs/hybrid/baco__hybrid__s4.jpg"
+  },
+  "im5959": {
+   "case": "baco",
+   "condition": "code",
+   "seed": 5,
+   "source": "research/runs/code/baco__code__s5__r3.jpg"
+  },
+  "im6377": {
+   "case": "baco",
+   "condition": "edit",
+   "seed": 5,
+   "source": "research/runs/edit/baco__edit__s5.png"
+  },
+  "im2233": {
+   "case": "baco",
+   "condition": "hybrid",
+   "seed": 5,
+   "source": "research/runs/hybrid/baco__hybrid__s5.jpg"
+  },
+  "im2193": {
+   "case": "atenas",
+   "condition": "code",
+   "seed": 1,
+   "source": "research/runs/code/atenas__code__s1__r4.jpg"
+  },
+  "im3722": {
+   "case": "atenas",
+   "condition": "edit",
+   "seed": 1,
+   "source": "research/runs/edit/atenas__edit__s1.png"
+  },
+  "im6735": {
+   "case": "atenas",
+   "condition": "hybrid",
+   "seed": 1,
+   "source": "research/runs/hybrid/atenas__hybrid__s1.jpg"
+  },
+  "im6671": {
+   "case": "atenas",
+   "condition": "code",
+   "seed": 2,
+   "source": "research/runs/code/atenas__code__s2__r4.jpg"
+  },
+  "im3322": {
+   "case": "atenas",
+   "condition": "edit",
+   "seed": 2,
+   "source": "research/runs/edit/atenas__edit__s2.png"
+  },
+  "im5135": {
+   "case": "atenas",
+   "condition": "hybrid",
+   "seed": 2,
+   "source": "research/runs/hybrid/atenas__hybrid__s2.jpg"
+  },
+  "im8973": {
+   "case": "atenas",
+   "condition": "code",
+   "seed": 3,
+   "source": "research/runs/code/atenas__code__s3__r4.jpg"
+  },
+  "im7272": {
+   "case": "atenas",
+   "condition": "edit",
+   "seed": 3,
+   "source": "research/runs/edit/atenas__edit__s3.png"
+  },
+  "im2861": {
+   "case": "atenas",
+   "condition": "hybrid",
+   "seed": 3,
+   "source": "research/runs/hybrid/atenas__hybrid__s3.jpg"
+  },
+  "im3733": {
+   "case": "atenas",
+   "condition": "code",
+   "seed": 4,
+   "source": "research/runs/code/atenas__code__s4__r4.jpg"
+  },
+  "im7448": {
+   "case": "atenas",
+   "condition": "edit",
+   "seed": 4,
+   "source": "research/runs/edit/atenas__edit__s4.png"
+  },
+  "im9394": {
+   "case": "atenas",
+   "condition": "hybrid",
+   "seed": 4,
+   "source": "research/runs/hybrid/atenas__hybrid__s4.jpg"
+  },
+  "im6019": {
+   "case": "atenas",
+   "condition": "code",
+   "seed": 5,
+   "source": "research/runs/code/atenas__code__s5__r4.jpg"
+  },
+  "im8995": {
+   "case": "atenas",
+   "condition": "edit",
+   "seed": 5,
+   "source": "research/runs/edit/atenas__edit__s5.png"
+  },
+  "im4357": {
+   "case": "atenas",
+   "condition": "hybrid",
+   "seed": 5,
+   "source": "research/runs/hybrid/atenas__hybrid__s5.jpg"
+  }
+ },
+ "pairs": {
+  "p01": {
+   "case": "prato",
+   "a": "code",
+   "b": "edit",
+   "seed": 1
+  },
+  "p02": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 1
+  },
+  "p03": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 1
+  },
+  "p04": {
+   "case": "prato",
+   "a": "code",
+   "b": "edit",
+   "seed": 2
+  },
+  "p05": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 2
+  },
+  "p06": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 2
+  },
+  "p07": {
+   "case": "prato",
+   "a": "code",
+   "b": "edit",
+   "seed": 3
+  },
+  "p08": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 3
+  },
+  "p09": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 3
+  },
+  "p10": {
+   "case": "prato",
+   "a": "code",
+   "b": "edit",
+   "seed": 4
+  },
+  "p11": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 4
+  },
+  "p12": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 4
+  },
+  "p13": {
+   "case": "prato",
+   "a": "code",
+   "b": "edit",
+   "seed": 5
+  },
+  "p14": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 5
+  },
+  "p15": {
+   "case": "prato",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 5
+  },
+  "p16": {
+   "case": "arnolfini",
+   "a": "code",
+   "b": "edit",
+   "seed": 1
+  },
+  "p17": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 1
+  },
+  "p18": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 1
+  },
+  "p19": {
+   "case": "arnolfini",
+   "a": "code",
+   "b": "edit",
+   "seed": 2
+  },
+  "p20": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 2
+  },
+  "p21": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 2
+  },
+  "p22": {
+   "case": "arnolfini",
+   "a": "code",
+   "b": "edit",
+   "seed": 3
+  },
+  "p23": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 3
+  },
+  "p24": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 3
+  },
+  "p25": {
+   "case": "arnolfini",
+   "a": "code",
+   "b": "edit",
+   "seed": 4
+  },
+  "p26": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 4
+  },
+  "p27": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 4
+  },
+  "p28": {
+   "case": "arnolfini",
+   "a": "code",
+   "b": "edit",
+   "seed": 5
+  },
+  "p29": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 5
+  },
+  "p30": {
+   "case": "arnolfini",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 5
+  },
+  "p31": {
+   "case": "baco",
+   "a": "code",
+   "b": "edit",
+   "seed": 1
+  },
+  "p32": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 1
+  },
+  "p33": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 1
+  },
+  "p34": {
+   "case": "baco",
+   "a": "code",
+   "b": "edit",
+   "seed": 2
+  },
+  "p35": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 2
+  },
+  "p36": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 2
+  },
+  "p37": {
+   "case": "baco",
+   "a": "code",
+   "b": "edit",
+   "seed": 3
+  },
+  "p38": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 3
+  },
+  "p39": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 3
+  },
+  "p40": {
+   "case": "baco",
+   "a": "code",
+   "b": "edit",
+   "seed": 4
+  },
+  "p41": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 4
+  },
+  "p42": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 4
+  },
+  "p43": {
+   "case": "baco",
+   "a": "code",
+   "b": "edit",
+   "seed": 5
+  },
+  "p44": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 5
+  },
+  "p45": {
+   "case": "baco",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 5
+  },
+  "p46": {
+   "case": "atenas",
+   "a": "code",
+   "b": "edit",
+   "seed": 1
+  },
+  "p47": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 1
+  },
+  "p48": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 1
+  },
+  "p49": {
+   "case": "atenas",
+   "a": "code",
+   "b": "edit",
+   "seed": 2
+  },
+  "p50": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 2
+  },
+  "p51": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 2
+  },
+  "p52": {
+   "case": "atenas",
+   "a": "code",
+   "b": "edit",
+   "seed": 3
+  },
+  "p53": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 3
+  },
+  "p54": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 3
+  },
+  "p55": {
+   "case": "atenas",
+   "a": "code",
+   "b": "edit",
+   "seed": 4
+  },
+  "p56": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 4
+  },
+  "p57": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 4
+  },
+  "p58": {
+   "case": "atenas",
+   "a": "code",
+   "b": "edit",
+   "seed": 5
+  },
+  "p59": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "edit",
+   "seed": 5
+  },
+  "p60": {
+   "case": "atenas",
+   "a": "hybrid",
+   "b": "code",
+   "seed": 5
+  }
+ }
+}

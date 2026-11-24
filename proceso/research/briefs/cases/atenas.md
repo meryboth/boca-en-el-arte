@@ -1,0 +1,7 @@
+- Caso: atenas — Rafael, La escuela de Atenas (1509-11), fresco.
+- Pintura fuente: research/sources/work/atenas.jpg
+- Cambios de color pedidos:
+  - Toda túnica, manto o capa que sea roja, rosada, naranja, verde, púrpura o marrón pasa a azul (#103F79) o a oro (#F3B229).
+  - Alternar los dos colores entre figuras vecinas, y entre la túnica y el manto de una misma figura, para que la multitud se lea en azul y oro.
+  - Las prendas que ya son azules o amarillas conservan su color. Las blancas y grises quedan como están.
+  - No cambian: caras, pelo, manos y piel de las figuras, sus poses, los libros y objetos que sostienen, las estatuas, la arquitectura, el piso, el cielo, el arco pintado y la decoración que rodea la escena.

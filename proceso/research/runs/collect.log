@@ -1,0 +1,61 @@
+e0001 code prato 1 {'alteracion': 0.0, 'tono': 1.99, 'pliegues': 0.95, 'alteracion_max': 0.0, 'tono_max': 2.41, 'resolucion': 1.0}
+e0002 edit prato 1 {'alteracion': 4.21, 'tono': 11.96, 'pliegues': 0.87, 'alteracion_max': 4.98, 'tono_max': 12.77, 'resolucion': 1.08, 'credits': 38.45}
+e0003 hybrid prato 1 {'alteracion': 0.0, 'tono': 12.0, 'pliegues': 0.87, 'alteracion_max': 0.0, 'tono_max': 12.78, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0004 code prato 2 {'alteracion': 0.0, 'tono': 0.71, 'pliegues': 0.93, 'alteracion_max': 0.0, 'tono_max': 0.99, 'resolucion': 1.0}
+e0005 edit prato 2 {'alteracion': 4.12, 'tono': 11.74, 'pliegues': 0.86, 'alteracion_max': 5.33, 'tono_max': 13.75, 'resolucion': 1.08, 'credits': 38.45}
+e0006 hybrid prato 2 {'alteracion': 0.0, 'tono': 11.77, 'pliegues': 0.86, 'alteracion_max': 0.0, 'tono_max': 13.86, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0007 code prato 3 {'alteracion': 0.0, 'tono': 0.63, 'pliegues': 0.9, 'alteracion_max': 0.0, 'tono_max': 0.66, 'resolucion': 1.0}
+e0008 edit prato 3 {'alteracion': 4.38, 'tono': 14.21, 'pliegues': 0.86, 'alteracion_max': 4.92, 'tono_max': 16.61, 'resolucion': 1.08, 'credits': 38.45}
+e0009 hybrid prato 3 {'alteracion': 0.0, 'tono': 14.26, 'pliegues': 0.86, 'alteracion_max': 0.0, 'tono_max': 16.71, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0010 code prato 4 {'alteracion': 0.0, 'tono': 0.46, 'pliegues': 0.92, 'alteracion_max': 0.0, 'tono_max': 0.49, 'resolucion': 1.0}
+e0011 edit prato 4 {'alteracion': 4.31, 'tono': 12.0, 'pliegues': 0.85, 'alteracion_max': 5.47, 'tono_max': 13.18, 'resolucion': 1.08, 'credits': 38.45}
+e0012 hybrid prato 4 {'alteracion': 0.0, 'tono': 11.97, 'pliegues': 0.85, 'alteracion_max': 0.0, 'tono_max': 13.2, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0013 code prato 5 {'alteracion': 0.0, 'tono': 0.68, 'pliegues': 0.91, 'alteracion_max': 0.0, 'tono_max': 0.83, 'resolucion': 1.0}
+e0014 edit prato 5 {'alteracion': 4.51, 'tono': 13.29, 'pliegues': 0.86, 'alteracion_max': 5.16, 'tono_max': 15.71, 'resolucion': 1.08, 'credits': 38.45}
+e0015 hybrid prato 5 {'alteracion': 0.0, 'tono': 13.33, 'pliegues': 0.86, 'alteracion_max': 0.0, 'tono_max': 15.76, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0016 code arnolfini 1 {'alteracion': 0.0, 'tono': 0.99, 'pliegues': 0.99, 'alteracion_max': 0.0, 'tono_max': 1.76, 'resolucion': 1.0}
+e0017 edit arnolfini 1 {'alteracion': 5.94, 'tono': 4.92, 'pliegues': 0.81, 'alteracion_max': 7.29, 'tono_max': 7.52, 'resolucion': 1.15, 'credits': 38.46}
+e0018 hybrid arnolfini 1 {'alteracion': 0.0, 'tono': 4.92, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 7.43, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0019 code arnolfini 2 {'alteracion': 0.0, 'tono': 1.18, 'pliegues': 1.0, 'alteracion_max': 0.0, 'tono_max': 2.19, 'resolucion': 1.0}
+e0020 edit arnolfini 2 {'alteracion': 5.63, 'tono': 5.37, 'pliegues': 0.82, 'alteracion_max': 7.07, 'tono_max': 6.72, 'resolucion': 1.15, 'credits': 38.46}
+e0021 hybrid arnolfini 2 {'alteracion': 0.0, 'tono': 5.37, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 6.69, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0022 code arnolfini 3 {'alteracion': 0.0, 'tono': 1.09, 'pliegues': 0.99, 'alteracion_max': 0.0, 'tono_max': 4.0, 'resolucion': 1.0}
+e0023 edit arnolfini 3 {'alteracion': 5.68, 'tono': 5.37, 'pliegues': 0.82, 'alteracion_max': 7.1, 'tono_max': 7.36, 'resolucion': 1.15, 'credits': 38.46}
+e0024 hybrid arnolfini 3 {'alteracion': 0.0, 'tono': 5.35, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 7.31, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0025 code arnolfini 4 {'alteracion': 0.0, 'tono': 1.28, 'pliegues': 0.98, 'alteracion_max': 0.0, 'tono_max': 3.82, 'resolucion': 1.0}
+e0026 edit arnolfini 4 {'alteracion': 6.11, 'tono': 5.42, 'pliegues': 0.82, 'alteracion_max': 7.0, 'tono_max': 7.75, 'resolucion': 1.15, 'credits': 38.46}
+e0027 hybrid arnolfini 4 {'alteracion': 0.0, 'tono': 5.41, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 7.58, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0028 code arnolfini 5 {'alteracion': 0.0, 'tono': 2.43, 'pliegues': 0.99, 'alteracion_max': 0.0, 'tono_max': 4.34, 'resolucion': 1.0}
+e0029 edit arnolfini 5 {'alteracion': 5.74, 'tono': 3.28, 'pliegues': 0.82, 'alteracion_max': 6.77, 'tono_max': 5.88, 'resolucion': 1.15, 'credits': 38.46}
+e0030 hybrid arnolfini 5 {'alteracion': 0.0, 'tono': 3.28, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 5.84, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0031 code baco 1 {'alteracion': 0.0, 'tono': 0.87, 'pliegues': 0.83, 'alteracion_max': 0.0, 'tono_max': 2.3, 'resolucion': 1.0}
+e0032 edit baco 1 {'alteracion': 5.28, 'tono': 13.79, 'pliegues': 0.81, 'alteracion_max': 7.3, 'tono_max': 16.48, 'resolucion': 0.92, 'credits': 38.52}
+e0033 hybrid baco 1 {'alteracion': 0.0, 'tono': 13.71, 'pliegues': 0.82, 'alteracion_max': 0.0, 'tono_max': 16.39, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0034 code baco 2 {'alteracion': 0.0, 'tono': 0.93, 'pliegues': 0.83, 'alteracion_max': 0.0, 'tono_max': 1.81, 'resolucion': 1.0}
+e0035 edit baco 2 {'alteracion': 6.34, 'tono': 18.07, 'pliegues': 0.85, 'alteracion_max': 10.03, 'tono_max': 25.57, 'resolucion': 0.92, 'credits': 38.46}
+e0036 hybrid baco 2 {'alteracion': 0.0, 'tono': 18.08, 'pliegues': 0.88, 'alteracion_max': 0.0, 'tono_max': 24.85, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0037 code baco 3 {'alteracion': 0.0, 'tono': 1.0, 'pliegues': 0.91, 'alteracion_max': 0.0, 'tono_max': 1.92, 'resolucion': 1.0}
+e0038 edit baco 3 {'alteracion': 4.68, 'tono': 12.95, 'pliegues': 0.83, 'alteracion_max': 5.88, 'tono_max': 17.52, 'resolucion': 0.92, 'credits': 38.46}
+e0039 hybrid baco 3 {'alteracion': 0.0, 'tono': 12.83, 'pliegues': 0.86, 'alteracion_max': 0.0, 'tono_max': 17.33, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0040 code baco 4 {'alteracion': 0.0, 'tono': 1.09, 'pliegues': 0.85, 'alteracion_max': 0.0, 'tono_max': 2.04, 'resolucion': 1.0}
+e0041 edit baco 4 {'alteracion': 5.11, 'tono': 7.48, 'pliegues': 0.83, 'alteracion_max': 10.49, 'tono_max': 11.43, 'resolucion': 0.92, 'credits': 38.46}
+e0042 hybrid baco 4 {'alteracion': 0.0, 'tono': 7.38, 'pliegues': 0.84, 'alteracion_max': 0.0, 'tono_max': 11.52, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0043 code baco 5 {'alteracion': 0.0, 'tono': 0.94, 'pliegues': 0.77, 'alteracion_max': 0.0, 'tono_max': 1.72, 'resolucion': 1.0}
+e0044 edit baco 5 {'alteracion': 5.65, 'tono': 14.93, 'pliegues': 0.82, 'alteracion_max': 12.53, 'tono_max': 15.31, 'resolucion': 0.92, 'credits': 38.46}
+e0045 hybrid baco 5 {'alteracion': 0.0, 'tono': 14.87, 'pliegues': 0.85, 'alteracion_max': 0.0, 'tono_max': 15.21, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 1.0}
+e0046 code atenas 1 {'alteracion': 0.34, 'tono': 0.82, 'pliegues': 0.54, 'alteracion_max': 1.02, 'tono_max': 1.05, 'resolucion': 1.0}
+e0047 edit atenas 1 {'alteracion': 4.59, 'tono': 13.43, 'pliegues': 0.86, 'alteracion_max': 8.67, 'tono_max': 24.87, 'resolucion': 1.67, 'credits': 38.51}
+e0048 hybrid atenas 1 {'alteracion': 0.34, 'tono': 13.39, 'pliegues': 0.9, 'alteracion_max': 1.02, 'tono_max': 24.73, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0049 code atenas 2 {'alteracion': 0.34, 'tono': 0.74, 'pliegues': 0.88, 'alteracion_max': 1.02, 'tono_max': 1.3, 'resolucion': 1.0}
+e0050 edit atenas 2 {'alteracion': 5.84, 'tono': 14.84, 'pliegues': 0.8, 'alteracion_max': 10.0, 'tono_max': 25.59, 'resolucion': 1.67, 'credits': 38.46}
+e0051 hybrid atenas 2 {'alteracion': 0.34, 'tono': 14.76, 'pliegues': 0.9, 'alteracion_max': 1.02, 'tono_max': 25.0, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0052 code atenas 3 {'alteracion': 0.34, 'tono': 0.81, 'pliegues': 0.66, 'alteracion_max': 1.02, 'tono_max': 6.68, 'resolucion': 1.0}
+e0053 edit atenas 3 {'alteracion': 4.52, 'tono': 14.18, 'pliegues': 0.8, 'alteracion_max': 8.83, 'tono_max': 26.46, 'resolucion': 1.67, 'credits': 38.46}
+e0054 hybrid atenas 3 {'alteracion': 0.34, 'tono': 14.03, 'pliegues': 0.84, 'alteracion_max': 1.02, 'tono_max': 26.38, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0055 code atenas 4 {'alteracion': 0.34, 'tono': 0.7, 'pliegues': 0.87, 'alteracion_max': 1.02, 'tono_max': 1.08, 'resolucion': 1.0}
+e0056 edit atenas 4 {'alteracion': 5.97, 'tono': 14.58, 'pliegues': 0.67, 'alteracion_max': 11.44, 'tono_max': 39.06, 'resolucion': 1.67, 'credits': 38.46}
+e0057 hybrid atenas 4 {'alteracion': 0.34, 'tono': 14.44, 'pliegues': 0.9, 'alteracion_max': 1.02, 'tono_max': 38.9, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+e0058 code atenas 5 {'alteracion': 0.34, 'tono': 0.74, 'pliegues': 0.75, 'alteracion_max': 1.02, 'tono_max': 0.98, 'resolucion': 1.0}
+e0059 edit atenas 5 {'alteracion': 4.49, 'tono': 12.43, 'pliegues': 0.86, 'alteracion_max': 8.84, 'tono_max': 26.52, 'resolucion': 1.67, 'credits': 38.46}
+e0060 hybrid atenas 5 {'alteracion': 0.34, 'tono': 12.46, 'pliegues': 0.88, 'alteracion_max': 1.02, 'tono_max': 26.41, 'resolucion': 1.0, 'credits': 0.0, 'ecc_correlation': 0.99}
+lineas nuevas: 60

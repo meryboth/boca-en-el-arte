@@ -1,0 +1,358 @@
+{
+ "_doc": "Parches de medicion por caso, en coordenadas de la vista previa (ancho coord_width). protegidas: no deben cambiar. ropa: deben quedar del color indicado (azul, oro, o cualquiera de los dos). Dibujados por Fable sobre el original antes de cualquier corrida de evaluacion; pendientes de revision de Marilyn.",
+ "prato": {
+  "source": "research/sources/work/prato.jpg",
+  "coord_width": 781,
+  "protegidas": {
+   "cara_virgen": [
+    335,
+    185,
+    405,
+    265
+   ],
+   "cielo": [
+    480,
+    40,
+    620,
+    140
+   ],
+   "paisaje": [
+    560,
+    290,
+    700,
+    330
+   ],
+   "nino_jesus": [
+    350,
+    600,
+    450,
+    720
+   ],
+   "nino_juan": [
+    95,
+    580,
+    165,
+    650
+   ],
+   "suelo": [
+    600,
+    640,
+    740,
+    720
+   ]
+  },
+  "ropa": {
+   "vestido_pecho": {
+    "rect": [
+     275,
+     345,
+     395,
+     425
+    ],
+    "color": "oro"
+   },
+   "vestido_manga": {
+    "rect": [
+     215,
+     425,
+     270,
+     505
+    ],
+    "color": "oro"
+   }
+  },
+  "source_original": "research/sources/prato__rafael-1505__commons.jpg"
+ },
+ "arnolfini": {
+  "source": "research/sources/work/arnolfini.jpg",
+  "coord_width": 731,
+  "protegidas": {
+   "cara_hombre": [
+    185,
+    180,
+    235,
+    245
+   ],
+   "cara_mujer": [
+    530,
+    205,
+    575,
+    270
+   ],
+   "espejo": [
+    335,
+    265,
+    405,
+    335
+   ],
+   "cama": [
+    660,
+    400,
+    725,
+    560
+   ],
+   "piso": [
+    300,
+    790,
+    400,
+    840
+   ],
+   "perro": [
+    290,
+    860,
+    395,
+    945
+   ],
+   "tocado": [
+    592,
+    235,
+    622,
+    295
+   ]
+  },
+  "ropa": {
+   "tabardo_bajo": {
+    "rect": [
+     140,
+     500,
+     280,
+     700
+    ],
+    "color": "azul"
+   },
+   "vestido_medio": {
+    "rect": [
+     475,
+     440,
+     555,
+     620
+    ],
+    "color": "oro"
+   },
+   "vestido_cola": {
+    "rect": [
+     490,
+     660,
+     640,
+     880
+    ],
+    "color": "oro"
+   }
+  },
+  "source_original": "research/sources/arnolfini__vaneyck-1434__commons.jpg"
+ },
+ "baco": {
+  "source": "research/sources/work/baco.jpg",
+  "coord_width": 1000,
+  "protegidas": {
+   "cielo": [
+    30,
+    60,
+    200,
+    200
+   ],
+   "ariadna_vestido": [
+    60,
+    540,
+    110,
+    605
+   ],
+   "guepardo": [
+    215,
+    600,
+    330,
+    690
+   ],
+   "baco_torso": [
+    400,
+    370,
+    465,
+    435
+   ],
+   "satiro_torso": [
+    705,
+    475,
+    800,
+    560
+   ],
+   "pano_blanco": [
+    80,
+    815,
+    215,
+    865
+   ]
+  },
+  "ropa": {
+   "capa_baco": {
+    "rect": [
+     435,
+     240,
+     555,
+     295
+    ],
+    "color": "azul"
+   },
+   "faja_ariadna": {
+    "rect": [
+     137,
+     535,
+     158,
+     600
+    ],
+    "color": "oro"
+   },
+   "vestido_naranja": {
+    "rect": [
+     578,
+     495,
+     628,
+     560
+    ],
+    "color": "oro"
+   }
+  },
+  "source_original": "research/sources/baco__tiziano-1520__commons.jpg"
+ },
+ "atenas": {
+  "source": "research/sources/work/atenas.jpg",
+  "coord_width": 1000,
+  "protegidas": {
+   "cielo": [
+    503,
+    368,
+    552,
+    398
+   ],
+   "arquitectura": [
+    300,
+    235,
+    355,
+    330
+   ],
+   "estatua": [
+    228,
+    205,
+    268,
+    315
+   ],
+   "piso": [
+    565,
+    645,
+    700,
+    680
+   ],
+   "arco": [
+    875,
+    155,
+    955,
+    245
+   ],
+   "boveda": [
+    445,
+    112,
+    555,
+    148
+   ]
+  },
+  "ropa": {
+   "platon": {
+    "rect": [
+     497,
+     425,
+     518,
+     500
+    ],
+    "color": "cualquiera"
+   },
+   "naranja_der": {
+    "rect": [
+     607,
+     435,
+     638,
+     510
+    ],
+    "color": "cualquiera"
+   },
+   "rojo_der": {
+    "rect": [
+     817,
+     425,
+     848,
+     500
+    ],
+    "color": "cualquiera"
+   },
+   "verde_izq": {
+    "rect": [
+     368,
+     435,
+     398,
+     490
+    ],
+    "color": "cualquiera"
+   }
+  },
+  "source_original": "research/sources/atenas__rafael-1509__commons-w3840.jpg"
+ },
+ "julio2": {
+  "_nota": "Caso de calibracion: parches dibujados DESPUES de ver resultados de los pilotos. Solo para probar el script y comparar pilotos; no entra en la evaluacion.",
+  "source": "research/sources/work/julio2.jpg",
+  "coord_width": 662,
+  "protegidas": {
+   "cara": [
+    305,
+    215,
+    400,
+    320
+   ],
+   "fondo": [
+    450,
+    30,
+    640,
+    150
+   ],
+   "tunica": [
+    250,
+    740,
+    480,
+    880
+   ],
+   "barba": [
+    300,
+    330,
+    385,
+    410
+   ]
+  },
+  "ropa": {
+   "capa_hombro": {
+    "rect": [
+     120,
+     380,
+     250,
+     440
+    ],
+    "color": "azul"
+   },
+   "capa_baja": {
+    "rect": [
+     420,
+     520,
+     540,
+     590
+    ],
+    "color": "azul"
+   },
+   "gorro": {
+    "rect": [
+     275,
+     150,
+     375,
+     195
+    ],
+    "color": "azul"
+   }
+  },
+  "source_original": "research/sources/julio2__rafael-1511__commons.jpg"
+ }
+}

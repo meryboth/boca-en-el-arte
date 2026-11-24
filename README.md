@@ -14,7 +14,7 @@ Un museo imaginario: diez pinturas clásicas con la ropa repintada de azul y oro
 
 **Proyecto no oficial.** No tiene relación con ningún club. No usa escudos, marcas, sponsors ni nombres de jugadores.
 
-Este repo contiene solo el sitio ya construido. Abajo está el resumen técnico de la investigación que lo produjo.
+En la raíz del repo está el sitio ya construido. Abajo está el resumen técnico de la investigación que lo produjo; el registro completo está en [`proceso/`](proceso/).
 
 ## Qué se investigó
 
@@ -192,6 +192,7 @@ Los créditos son la cifra de Comfy Cloud por trabajo, no un monto facturado. No
 - `obras/` — las obras solas, para verlas en grande.
 - `intro.mp4` — el teaser de la portada (sin sonido).
 - `readme/` — las imágenes y los GIFs de este README; el sitio no los usa.
+- [`proceso/`](proceso/) — el registro de la investigación: protocolo, corridas, resultados, bitácoras, hojas de imágenes y código. El sitio no lo usa.
 
 Es un sitio estático: no hay que instalar ni compilar nada. Para verlo en local:
 
@@ -199,7 +200,7 @@ Es un sitio estático: no hay que instalar ni compilar nada. Para verlo en local
 python -m http.server 8000
 ```
 
-y abrir http://localhost:8000. El código que genera la sala, los datos del experimento y las bitácoras no están en este repo.
+y abrir http://localhost:8000.
 
 ## Créditos y licencias
 

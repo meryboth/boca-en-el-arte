@@ -1,0 +1,75 @@
+{
+ "fecha": "2026-11-17T13:26:12.868Z",
+ "obras": [
+  {
+   "id": "im6647",
+   "pintura": "prato",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · intento 3",
+   "fuente": "research/runs/hybrid/prato__hybrid__s3.jpg"
+  },
+  {
+   "id": "im3825",
+   "pintura": "arnolfini",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · intento 2",
+   "fuente": "research/runs/hybrid/arnolfini__hybrid__s2.jpg"
+  },
+  {
+   "id": "im2153",
+   "pintura": "baco",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · intento 1",
+   "fuente": "research/runs/hybrid/baco__hybrid__s1.jpg"
+  },
+  {
+   "id": "im2193",
+   "pintura": "atenas",
+   "metodo": "code",
+   "etiqueta": "Código (Fable 5.2) · intento 1",
+   "fuente": "research/runs/code/atenas__code__s1__r4.jpg"
+  },
+  {
+   "id": "julio2__hybrid-a__sin-sillon",
+   "pintura": "julio2",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · edición A (franja bordada)",
+   "fuente": "museo/obras/julio2__hybrid-a__sin-sillon.jpg"
+  },
+  {
+   "id": "armino__auto-hybrid__m1",
+   "pintura": "armino",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · máscara automática",
+   "fuente": "museo/obras/armino__auto-hybrid__m1.jpg"
+  },
+  {
+   "id": "enrique8__auto-hybrid__m1",
+   "pintura": "enrique8",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · máscara automática",
+   "fuente": "museo/obras/enrique8__auto-hybrid__m1.jpg"
+  },
+  {
+   "id": "castiglione__auto-hybrid__m1",
+   "pintura": "castiglione",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · máscara automática",
+   "fuente": "museo/obras/castiglione__auto-hybrid__m1.jpg"
+  },
+  {
+   "id": "eleonora__auto-hybrid__m1",
+   "pintura": "eleonora",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · máscara automática",
+   "fuente": "museo/obras/eleonora__auto-hybrid__m1.jpg"
+  },
+  {
+   "id": "embajadores__auto-hybrid__m1",
+   "pintura": "embajadores",
+   "metodo": "hybrid",
+   "etiqueta": "Combinado · máscara automática",
+   "fuente": "museo/obras/embajadores__auto-hybrid__m1.jpg"
+  }
+ ]
+}

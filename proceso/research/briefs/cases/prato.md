@@ -1,0 +1,6 @@
+- Caso: prato — Rafael, Madonna del Prato (1505-06).
+- Pintura fuente: research/sources/work/prato.jpg
+- Cambios de color pedidos:
+  - El vestido rojo de la Virgen pasa a oro (#F3B229).
+  - Su manto azul queda como está.
+  - No cambian: caras, pelo y piel de las tres figuras, el paño gris del niño arrodillado, la cruz fina, el escote y los ribetes oscuros bordados, el paisaje, el cielo.

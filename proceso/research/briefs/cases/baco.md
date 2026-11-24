@@ -1,0 +1,8 @@
+- Caso: baco — Tiziano, Baco y Ariadna (1520-23).
+- Pintura fuente: research/sources/work/baco.jpg
+- Cambios de color pedidos:
+  - La capa rosada que vuela detrás del hombre que salta y el paño rosado de su cadera pasan a azul (#103F79).
+  - La faja roja de la mujer de la izquierda pasa a oro (#F3B229). Su vestido azul queda azul.
+  - El vestido naranja de la mujer de los platillos pasa a oro (#F3B229). Su falda azul queda azul.
+  - El paño rojizo del pequeño fauno y la tela roja tirada en el suelo pasan a oro (#F3B229).
+  - No cambian: caras, cuerpos y piel de todas las figuras, los paños blancos, los guepardos, el perro, el carro, los árboles, el paisaje, el mar, el cielo.

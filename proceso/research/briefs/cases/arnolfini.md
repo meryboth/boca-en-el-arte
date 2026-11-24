@@ -1,0 +1,6 @@
+- Caso: arnolfini — Jan van Eyck, Matrimonio Arnolfini (1434).
+- Pintura fuente: research/sources/work/arnolfini.jpg
+- Cambios de color pedidos:
+  - El tabardo púrpura-marrón oscuro con ribete de piel del hombre pasa a azul (#103F79), con una franja horizontal ancha en oro (#F3B229) cruzando el pecho, siguiendo los pliegues.
+  - El vestido verde de la mujer pasa a oro (#F3B229). Sus mangas azules quedan azules.
+  - No cambian: caras, manos, el sombrero negro del hombre, el tocado blanco de la mujer, los ribetes de piel, el perro, el espejo, la lámpara, la cama y las cortinas rojas, la ventana, el piso, los zuecos.

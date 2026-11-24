@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museo Xeneize</title>
+<meta name="description" content="Un museo imaginario: pintura clásica vestida de azul y oro. Homenaje de hincha, no oficial.">
+<style>
+  :root { --azul:#103f79; --oro:#f3b229; --tinta:#f4f1ea; --sombra:#0b0d12; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:auto; }
+  body { margin:0; background:var(--sombra); color:var(--tinta); font:17px/1.5 Georgia, "Times New Roman", serif; }
+  #recorrido { position:relative; }
+  #escena { position:sticky; top:0; height:100vh; height:100dvh; overflow:hidden; background:#000; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
+  #intro { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:left center; transition:opacity .8s ease; }
+  #intro.fuera { opacity:0; pointer-events:none; }
+  .con-intro #portada { opacity:0; }
+  .velo { position:absolute; inset:0; background:linear-gradient(180deg, #0008 0%, #0000 22%, #0000 55%, #000b 100%); pointer-events:none; }
+  header { position:absolute; left:0; right:0; top:0; padding:18px 22px; display:flex; justify-content:space-between; align-items:baseline; gap:16px; }
+  header strong { font-size:1.05rem; letter-spacing:.14em; text-transform:uppercase; font-family:system-ui, sans-serif; font-weight:600; }
+  header span { font:13px system-ui, sans-serif; opacity:.8; }
+  #portada, #ficha { position:absolute; left:22px; right:22px; bottom:86px; max-width:560px; transition:opacity .45s ease, transform .45s ease; }
+  #portada h1 { font-size:clamp(2.2rem, 6vw, 4.2rem); line-height:1.02; margin:0 0 10px; font-weight:400; }
+  #portada h1 em { color:var(--oro); font-style:normal; }
+  #portada p, #ficha p { margin:0; max-width:46ch; text-shadow:0 1px 8px #000; }
+  #ficha { border-left:4px solid var(--oro); padding-left:16px; }
+  #ficha h2 { margin:0 0 2px; font-size:clamp(1.4rem, 3.4vw, 2.1rem); font-weight:400; line-height:1.1; }
+  #ficha .autor { font-style:italic; opacity:.92; }
+  .oculto { opacity:0; transform:translateY(10px); pointer-events:none; }
+  #cerca { margin-top:12px; font:600 14px system-ui, sans-serif; color:#1a1408; background:var(--oro); border:0; border-radius:999px; padding:9px 16px; cursor:pointer; }
+  #cerca:focus-visible { outline:3px solid var(--tinta); outline-offset:2px; }
+  dialog { border:0; padding:0; background:#000; max-width:100vw; max-height:100dvh; width:100vw; height:100dvh; overflow:auto; }
+  dialog::backdrop { background:#000e; }
+  dialog img { display:block; margin:0 auto; max-width:none; width:min(100%, 2600px); height:auto; cursor:zoom-in; }
+  dialog img.grande { width:max(180vw, 2600px); cursor:zoom-out; }
+  dialog button { position:fixed; top:14px; right:14px; font:600 14px system-ui, sans-serif; color:#fff; background:#0009; border:1px solid #fff6; border-radius:999px; padding:9px 16px; cursor:pointer; }
+  nav { position:absolute; left:22px; right:22px; bottom:22px; display:flex; gap:10px; align-items:center; }
+  nav button { font:600 14px system-ui, sans-serif; color:var(--tinta); background:#ffffff14; border:1px solid #ffffff40; border-radius:999px; padding:10px 18px; cursor:pointer; backdrop-filter:blur(6px); }
+  nav button:hover { background:#ffffff26; } nav button:disabled { opacity:.35; cursor:default; }
+  nav button:focus-visible { outline:3px solid var(--oro); outline-offset:2px; }
+  #puntos { display:flex; gap:7px; margin-left:auto; }
+  #puntos i { width:9px; height:9px; border-radius:50%; background:#ffffff55; display:block; }
+  #puntos i.activo { background:var(--oro); }
+  #carga { position:absolute; inset:auto 0 0 0; height:3px; background:var(--oro); transform-origin:left; transform:scaleX(0); transition:transform .2s linear, opacity .6s ease; }
+  footer { padding:56px 22px 70px; max-width:760px; margin:0 auto; font:15px/1.6 system-ui, sans-serif; color:#c9c5bb; }
+  footer h2 { font:400 1.5rem Georgia, serif; color:var(--tinta); margin:0 0 10px; }
+  footer a { color:var(--oro); }
+  @media (max-width:640px) { header span { display:none; } #portada, #ficha { bottom:92px; } }
+</style>
+</head>
+<body>
+<div id="recorrido">
+  <div id="escena">
+    <canvas id="lienzo" aria-label="Recorrido por la sala del museo"></canvas>
+    <video id="intro" class="fuera" muted playsinline preload="auto" aria-hidden="true"></video>
+    <div class="velo"></div>
+    <header><strong>Museo Xeneize</strong><span>Deslizá hacia abajo para recorrer la sala</span></header>
+    <section id="portada">
+      <h1>La pintura clásica, de <em>azul y oro</em></h1>
+      <p>Obras maestras con la ropa cambiada. Se entra por el túnel.</p>
+    </section>
+    <section id="ficha" class="oculto" aria-live="polite">
+      <h2 id="titulo"></h2><p class="autor" id="autor"></p><button id="cerca" hidden>Ver de cerca</button>
+    </section>
+    <nav aria-label="Paradas del recorrido">
+      <button id="ant">Anterior</button><button id="sig">Siguiente</button>
+      <div id="puntos" aria-hidden="true"></div>
+    </nav>
+    <div id="carga"></div>
+  </div>
+</div>
+<dialog id="visor" aria-label="Obra ampliada"><button id="cerrar">Cerrar</button><img id="visorimg" alt=""></dialog>
+<footer>
+  <h2>Sobre este museo</h2>
+  <p>Es un museo imaginario y un homenaje de hincha. No es oficial ni está afiliado al Club Atlético Boca Juniors. Las pinturas originales son de dominio público; acá aparecen intervenidas: solo se cambió el color de las telas.</p>
+</footer>
+
+<script>
+const DATA = /*DATA*/;
+const N = DATA.frames.length, cv = document.getElementById('lienzo'), cx = cv.getContext('2d');
+const imgs = new Array(N), stills = [], $ = id => document.getElementById(id);
+const rec = $('recorrido'), VH_PER_STOP = 1.6;
+let cur = -1, want = 0, loaded = 0;
+
+function size() {
+  const d = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = Math.round(cv.clientWidth * d); cv.height = Math.round(cv.clientHeight * d); cur = -1; draw();
+}
+function nearest(i) {                         // closest frame already loaded, so scrolling never shows a hole
+  for (let k = 0; k < N; k++) { if (imgs[i - k] && imgs[i - k].ok) return imgs[i - k]; if (imgs[i + k] && imgs[i + k].ok) return imgs[i + k]; }
+  return null;
+}
+function draw() {
+  const st = stopAt(want), hi = st >= 0 ? stills[st] : null;      // standing at a stop: use its sharp picture
+  const im = hi && hi.ok ? hi : nearest(want); if (!im) return;
+  if (im.idx === cur) return; cur = im.idx;
+  const s = Math.max(cv.width / im.naturalWidth, cv.height / im.naturalHeight);
+  const w = im.naturalWidth * s, h = im.naturalHeight * s;
+  cx.drawImage(im, (cv.width - w) / 2, (cv.height - h) / 2, w, h);
+}
+function load(i) {
+  if (imgs[i]) return; const im = new Image(); im.idx = i; imgs[i] = im;
+  im.onload = () => { im.ok = true; loaded++; $('carga').style.transform = 'scaleX(' + loaded / N + ')'; if (loaded === N) $('carga').style.opacity = 0; if (Math.abs(i - want) < 3) { cur = -1; draw(); } };
+  im.src = DATA.frames[i];
+}
+function progress() {
+  const max = rec.offsetHeight - window.innerHeight;
+  return max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+}
+function anchor(k) { const p = DATA.paradas[k]; return k === 0 ? p.in : (p.in + p.out) / 2; }
+function stopAt(i) { return DATA.paradas.findIndex(p => i >= p.in && i <= p.out); }
+function update() {
+  want = Math.round(progress() * (N - 1)); draw();
+  if (want > 0) { endIntro(); loadAll(); }
+  const s = stopAt(want), p = s >= 0 ? DATA.paradas[s] : null;
+  $('portada').classList.toggle('oculto', want > DATA.paradas[0].out);
+  const show = p && p.titulo;
+  if (show) { $('titulo').textContent = p.titulo; $('autor').textContent = p.autor; $('cerca').hidden = !p.obra; $('cerca').dataset.src = p.obra || ''; }
+  $('ficha').classList.toggle('oculto', !show);
+  const near = nearestStop();
+  document.querySelectorAll('#puntos i').forEach((d, k) => d.classList.toggle('activo', k === near));
+  $('ant').disabled = near === 0 && want <= DATA.paradas[0].out; $('sig').disabled = near === DATA.paradas.length - 1;
+}
+function nearestStop() {
+  let best = 0, bd = 1e9;
+  DATA.paradas.forEach((p, k) => { const d = Math.abs(anchor(k) - want); if (d < bd) { bd = d; best = k; } });
+  return best;
+}
+function go(k) {
+  k = Math.max(0, Math.min(DATA.paradas.length - 1, k));
+  const f = anchor(k), max = rec.offsetHeight - window.innerHeight;
+  window.scrollTo({ top: f / (N - 1) * max, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}
+rec.style.height = (DATA.paradas.length * VH_PER_STOP * 100 + 100) + 'vh';
+DATA.paradas.forEach(() => $('puntos').appendChild(document.createElement('i')));
+$('ant').onclick = () => { const n = nearestStop(); go(want > anchor(n) + 2 ? n : n - 1); };
+$('sig').onclick = () => { const n = nearestStop(); go(want < anchor(n) - 2 ? n : n + 1); };
+addEventListener('keydown', e => { if (e.key === 'ArrowRight') $('sig').click(); if (e.key === 'ArrowLeft') $('ant').click(); });
+addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+addEventListener('resize', size);
+// first the stops, then a coarse pass, then everything: the walk is usable long before it is fully loaded
+const order = [...new Set([0, ...DATA.paradas.map(p => Math.round((p.in + p.out) / 2)), ...Array.from({ length: Math.ceil(N / 8) }, (_, k) => k * 8), ...Array.from({ length: N }, (_, k) => k)])];
+const loadAll = () => { if (!loadAll.done) { loadAll.done = true; order.forEach(load); } };
+load(0);
+DATA.paradas.forEach((p, k) => { if (!p.still) return; const im = new Image(); im.idx = 100000 + k; stills[k] = im; im.onload = () => { im.ok = true; cur = -1; draw(); }; im.src = p.still; });
+$('cerca').onclick = () => { $('visorimg').src = $('cerca').dataset.src; $('visorimg').alt = $('titulo').textContent; $('visorimg').classList.remove('grande'); $('visor').showModal(); };
+$('cerrar').onclick = () => $('visor').close();
+$('visorimg').onclick = () => $('visorimg').classList.toggle('grande');
+// entrance clip: plays once over the first frame, on landscape screens only (its title is part of the picture)
+const vid = $('intro');
+function endIntro() { vid.classList.add('fuera'); document.body.classList.remove('con-intro'); if (!vid.paused) vid.pause(); }
+if (DATA.intro && innerWidth >= innerHeight && scrollY < 4 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.body.classList.add('con-intro');          // the clip carries the title: keep the cover text out from the start
+  vid.onplaying = () => { if (want === 0) vid.classList.remove('fuera'); loadAll(); };
+  vid.onended = vid.onerror = () => { endIntro(); loadAll(); };
+  vid.src = DATA.intro; vid.play().catch(() => { endIntro(); loadAll(); });
+  setTimeout(loadAll, 4000);                         // the clip goes first on the wire; the frames wait for it, but not for long
+} else loadAll();
+size(); update();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{
+ "evaluators": {
+  "Mari": {
+   "file": "research/eval-respuestas\\respuestas__mari.json",
+   "pairs_answered": 60,
+   "singles_answered": 60,
+   "started": "2026-11-17T13:13:32.367Z",
+   "finished": "2026-11-17T13:17:51.659Z",
+   "pairs_ms_median": 2044.0,
+   "singles_ms_median": 933.0,
+   "singles_under_1s": 33,
+   "chose_left": 23,
+   "chose_right": 33,
+   "undecided": 4,
+   "pairs": {
+    "hybrid_vs_edit": {
+     "n_decided": 16,
+     "wins_first": 11,
+     "wins_second": 5,
+     "rate_first": 0.688,
+     "ci95": [
+      0.438,
+      0.875
+     ],
+     "verdict": "sin ganador",
+     "undecided": 4,
+     "by_case": {
+      "prato": {
+       "first": 5,
+       "second": 0,
+       "undecided": 0
+      },
+      "arnolfini": {
+       "first": 3,
+       "second": 2,
+       "undecided": 0
+      },
+      "baco": {
+       "first": 2,
+       "second": 0,
+       "undecided": 3
+      },
+      "atenas": {
+       "first": 1,
+       "second": 3,
+       "undecided": 1
+      }
+     }
+    },
+    "hybrid_vs_code": {
+     "n_decided": 20,
+     "wins_first": 11,
+     "wins_second": 9,
+     "rate_first": 0.55,
+     "ci95": [
+      0.35,
+      0.75
+     ],
+     "verdict": "sin ganador",
+     "undecided": 0,
+     "by_case": {
+      "prato": {
+       "first": 5,
+       "second": 0,
+       "undecided": 0
+      },
+      "arnolfini": {
+       "first": 5,
+       "second": 0,
+       "undecided": 0
+      },
+      "baco": {
+       "first": 1,
+       "second": 4,
+       "undecided": 0
+      },
+      "atenas": {
+       "first": 0,
+       "second": 5,
+       "undecided": 0
+      }
+     }
+    },
+    "code_vs_edit": {
+     "n_decided": 20,
+     "wins_first": 9,
+     "wins_second": 11,
+     "rate_first": 0.45,
+     "ci95": [
+      0.25,
+      0.65
+     ],
+     "verdict": "sin ganador",
+     "undecided": 0,
+     "by_case": {
+      "prato": {
+       "first": 0,
+       "second": 5,
+       "undecided": 0
+      },
+      "arnolfini": {
+       "first": 0,
+       "second": 5,
+       "undecided": 0
+      },
+      "baco": {
+       "first": 4,
+       "second": 1,
+       "undecided": 0
+      },
+      "atenas": {
+       "first": 5,
+       "second": 0,
+       "undecided": 0
+      }
+     }
+    }
+   },
+   "singles": {
+    "code": {
+     "n": 20,
+     "flagged": 5,
+     "rate": 0.25,
+     "ci95": [
+      0.1,
+      0.45
+     ],
+     "flagged_images": [
+      "arnolfini s4",
+      "arnolfini s5",
+      "arnolfini s3",
+      "arnolfini s2",
+      "arnolfini s1"
+     ]
+    },
+    "edit": {
+     "n": 20,
+     "flagged": 0,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "flagged_images": []
+    },
+    "hybrid": {
+     "n": 20,
+     "flagged": 0,
+     "rate": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "flagged_images": []
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,77 @@
+60 ok runs, 6 not ok · total cost $0
+
+alteracion (lower is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 0 | 0–0.3409 |
+| edit | 20 | 5.192 | 4.12–6.344 |
+| hybrid | 20 | 0 | 0–0.3409 |
+  code vs edit: median diff -5.192 · 95 % CI [-5.642, -4.344] · wins 100% of 20 → better than baseline
+  hybrid vs edit: median diff -5.192 · 95 % CI [-5.642, -4.344] · wins 100% of 20 → better than baseline
+
+alteracion_max (lower is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 0 | 0–1.018 |
+| edit | 20 | 7.194 | 4.919–12.53 |
+| hybrid | 20 | 0 | 0–1.018 |
+  code vs edit: median diff -7.194 · 95 % CI [-7.817, -6.324] · wins 100% of 20 → better than baseline
+  hybrid vs edit: median diff -7.194 · 95 % CI [-7.817, -6.324] · wins 100% of 20 → better than baseline
+
+credits (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| edit | 20 | 38.46 | 38.45–38.52 |
+| hybrid | 20 | 0 | 0–0 |
+  hybrid vs edit: median diff -38.46 · 95 % CI [-38.46, -38.46] · wins 0% of 20 → worse than baseline
+
+ecc_correlation (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| hybrid | 20 | 0.9943 | 0.9871–0.9992 |
+
+pliegues (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 0.906 | 0.5439–0.997 |
+| edit | 20 | 0.827 | 0.667–0.8673 |
+| hybrid | 20 | 0.8537 | 0.8151–0.8994 |
+  code vs edit: median diff 0.07266 · 95 % CI [0.02142, 0.1187] · wins 75% of 20 → better than baseline
+  hybrid vs edit: median diff 0.00844 · 95 % CI [0.001082, 0.02459] · wins 70% of 20 → better than baseline
+
+resolucion (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 1 | 1–1 |
+| edit | 20 | 1.111 | 0.9187–1.666 |
+| hybrid | 20 | 1 | 1–1 |
+  code vs edit: median diff -0.1111 · 95 % CI [-0.1454, -0.07689] · wins 25% of 20 → worse than baseline
+  hybrid vs edit: median diff -0.1111 · 95 % CI [-0.1454, -0.07689] · wins 25% of 20 → worse than baseline
+
+script_runs (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 4 | 3–4 |
+
+tokens_total (higher is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 1.339e+05 | 9.235e+04–2.486e+05 |
+
+tono (lower is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 0.9002 | 0.4578–2.433 |
+| edit | 20 | 12.69 | 3.285–18.07 |
+| hybrid | 20 | 12.65 | 3.281–18.08 |
+  code vs edit: median diff -11.82 · 95 % CI [-13.15, -8.183] · wins 100% of 20 → better than baseline
+  hybrid vs edit: median diff -0.01632 · 95 % CI [-0.07288, 0.00441] · wins 70% of 20 → no winner: the interval crosses zero
+
+tono_max (lower is better)
+| condition | n | median | min–max |
+|---|---|---|---|
+| code | 20 | 1.788 | 0.4928–6.678 |
+| edit | 20 | 15.51 | 5.879–39.06 |
+| hybrid | 20 | 15.49 | 5.844–38.9 |
+  code vs edit: median diff -13.89 · 95 % CI [-17.86, -9.877] · wins 100% of 20 → better than baseline
+  hybrid vs edit: median diff -0.08396 · 95 % CI [-0.1239, -0.01157] · wins 70% of 20 → better than baseline

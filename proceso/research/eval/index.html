@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluación a ciegas</title>
+<style>
+  :root { --bg:#f6f4ef; --fg:#1d1b18; --muted:#6a655c; --line:#d9d4c8; --card:#fff; --accent:#103f79; --gold:#c98f0c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#171614; --fg:#eeeae2; --muted:#a39d91; --line:#3a3731; --card:#211f1c; --accent:#6ea0e6; --gold:#f3b229; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width:1500px; margin:0 auto; padding:20px 16px 60px; }
+  h1 { font-size:1.5rem; margin:0 0 6px; } h2 { font-size:1.15rem; margin:0 0 4px; }
+  p { margin:8px 0; max-width:68ch; } .muted { color:var(--muted); }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; margin:14px 0; }
+  input[type=text] { font:inherit; padding:9px 11px; border:1px solid var(--line); border-radius:7px; background:var(--bg); color:var(--fg); width:min(100%, 320px); }
+  button { font:inherit; padding:10px 18px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); cursor:pointer; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button:disabled { opacity:.45; cursor:default; }
+  button:focus-visible, .pick:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+  .bar { display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:10px; }
+  progress { width:220px; height:10px; accent-color:var(--accent); }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px) { .pair { grid-template-columns:1fr; } }
+  figure { margin:0; }
+  .pick { display:block; width:100%; padding:0; border:3px solid transparent; border-radius:10px; background:#0000; overflow:hidden; }
+  .pick:hover { border-color:var(--gold); }
+  .pick img, .single img { display:block; width:100%; height:auto; max-height:78vh; object-fit:contain; background:#111; }
+  figcaption { display:flex; gap:10px; justify-content:space-between; align-items:center; padding:8px 2px; }
+  .single { position:relative; display:inline-block; max-width:100%; cursor:crosshair; line-height:0; }
+  .dot { position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; border-radius:50%; border:3px solid #ff2bd6; background:#ff2bd633; pointer-events:none; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; align-items:center; }
+  dialog { border:0; padding:0; background:#000; max-width:98vw; max-height:98vh; }
+  dialog img { display:block; max-width:98vw; max-height:96vh; }
+  dialog::backdrop { background:#000c; }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <section id="intro">
+    <h1>Evaluación a ciegas</h1>
+    <p>Vas a ver pinturas clásicas a las que se les cambió el color de la ropa. Hay distintas formas de hacer ese cambio y queremos saber cuál queda mejor. No hay respuestas correctas: nos interesa lo que ves vos.</p>
+    <div class="card">
+      <h2>Parte 1 · ¿Cuál colgarías?</h2>
+      <p>Aparecen dos versiones de la misma pintura. Tocá la que colgarías en una pared. Podés ampliar cada una antes de elegir. Son 60 pares.</p>
+      <h2 style="margin-top:14px">Parte 2 · ¿Ves algo raro?</h2>
+      <p>Aparece una sola imagen. Si algo te parece retocado o artificial, tocá encima de cada lugar donde lo veas. Si no ves nada raro, decilo. Son 60 imágenes.</p>
+      <p class="muted">Podés parar cuando quieras: lo que hayas respondido se guarda en este navegador y al final descargás un archivo con tus respuestas.</p>
+    </div>
+    <div class="card">
+      <label for="who"><strong>Tu nombre o apodo</strong></label><br>
+      <input id="who" type="text" autocomplete="off" maxlength="40">
+      <div class="row"><button class="primary" id="start">Empezar</button><span class="muted" id="resume"></span></div>
+    </div>
+  </section>
+
+  <section id="p1" class="hidden">
+    <div class="bar"><h2 id="p1title"></h2><div><span class="muted" id="p1count"></span> <progress id="p1prog" max="1" value="0"></progress></div></div>
+    <p><strong>¿Cuál de las dos colgarías?</strong> <span class="muted">Tocá la imagen que elegís.</span></p>
+    <div class="pair">
+      <figure><button class="pick" id="pickL" aria-label="Elegir la imagen de la izquierda"><img id="imgL" alt="Versión de la izquierda"></button>
+        <figcaption><span class="muted">Izquierda</span><button data-zoom="imgL">Ampliar</button></figcaption></figure>
+      <figure><button class="pick" id="pickR" aria-label="Elegir la imagen de la derecha"><img id="imgR" alt="Versión de la derecha"></button>
+        <figcaption><span class="muted">Derecha</span><button data-zoom="imgR">Ampliar</button></figcaption></figure>
+    </div>
+    <div class="row"><button id="skip1">No puedo decidir</button><button id="to2">Pasar a la parte 2</button><button class="finish">Terminar y descargar</button></div>
+  </section>
+
+  <section id="p2" class="hidden">
+    <div class="bar"><h2 id="p2title"></h2><div><span class="muted" id="p2count"></span> <progress id="p2prog" max="1" value="0"></progress></div></div>
+    <p><strong>¿Ves algo retocado o artificial?</strong> <span class="muted">Tocá encima de cada lugar. Tocá de nuevo "Borrar marcas" si te equivocaste.</span></p>
+    <div class="single" id="single"><img id="imgS" alt="Pintura intervenida"></div>
+    <div class="row"><button class="primary" id="done2" disabled>Listo, marqué lo que vi</button><button id="none2">No veo nada raro</button><button id="clear2">Borrar marcas</button><button data-zoom="imgS">Ampliar</button><button class="finish">Terminar y descargar</button></div>
+  </section>
+
+  <section id="end" class="hidden">
+    <h1>Gracias</h1>
+    <div class="card"><p id="endsum"></p>
+      <p>Descargá el archivo y mandáselo a quien te pasó esta página.</p>
+      <div class="row"><button class="primary" id="dl">Descargar mis respuestas</button><button id="back">Seguir respondiendo</button></div></div>
+  </section>
+</main>
+<dialog id="zoom"><img id="zoomimg" alt="Imagen ampliada"></dialog>
+
+<script>
+const DATA = {"titles": {"prato": "Madonna del Prato", "arnolfini": "Matrimonio Arnolfini", "baco": "Baco y Ariadna", "atenas": "La escuela de Atenas"}, "pairs": [{"id": "p01", "case": "prato", "a": "im3386", "b": "im1399"}, {"id": "p02", "case": "prato", "a": "im4838", "b": "im1399"}, {"id": "p03", "case": "prato", "a": "im4838", "b": "im3386"}, {"id": "p04", "case": "prato", "a": "im4314", "b": "im4522"}, {"id": "p05", "case": "prato", "a": "im6626", "b": "im4522"}, {"id": "p06", "case": "prato", "a": "im6626", "b": "im4314"}, {"id": "p07", "case": "prato", "a": "im5927", "b": "im4547"}, {"id": "p08", "case": "prato", "a": "im6647", "b": "im4547"}, {"id": "p09", "case": "prato", "a": "im6647", "b": "im5927"}, {"id": "p10", "case": "prato", "a": "im8619", "b": "im1995"}, {"id": "p11", "case": "prato", "a": "im1177", "b": "im1995"}, {"id": "p12", "case": "prato", "a": "im1177", "b": "im8619"}, {"id": "p13", "case": "prato", "a": "im6793", "b": "im5805"}, {"id": "p14", "case": "prato", "a": "im5660", "b": "im5805"}, {"id": "p15", "case": "prato", "a": "im5660", "b": "im6793"}, {"id": "p16", "case": "arnolfini", "a": "im8890", "b": "im2939"}, {"id": "p17", "case": "arnolfini", "a": "im9345", "b": "im2939"}, {"id": "p18", "case": "arnolfini", "a": "im9345", "b": "im8890"}, {"id": "p19", "case": "arnolfini", "a": "im7537", "b": "im8716"}, {"id": "p20", "case": "arnolfini", "a": "im3825", "b": "im8716"}, {"id": "p21", "case": "arnolfini", "a": "im3825", "b": "im7537"}, {"id": "p22", "case": "arnolfini", "a": "im3106", "b": "im5943"}, {"id": "p23", "case": "arnolfini", "a": "im9816", "b": "im5943"}, {"id": "p24", "case": "arnolfini", "a": "im9816", "b": "im3106"}, {"id": "p25", "case": "arnolfini", "a": "im9879", "b": "im3209"}, {"id": "p26", "case": "arnolfini", "a": "im4853", "b": "im3209"}, {"id": "p27", "case": "arnolfini", "a": "im4853", "b": "im9879"}, {"id": "p28", "case": "arnolfini", "a": "im3709", "b": "im4178"}, {"id": "p29", "case": "arnolfini", "a": "im9756", "b": "im4178"}, {"id": "p30", "case": "arnolfini", "a": "im9756", "b": "im3709"}, {"id": "p31", "case": "baco", "a": "im2588", "b": "im3064"}, {"id": "p32", "case": "baco", "a": "im2153", "b": "im3064"}, {"id": "p33", "case": "baco", "a": "im2153", "b": "im2588"}, {"id": "p34", "case": "baco", "a": "im2265", "b": "im2433"}, {"id": "p35", "case": "baco", "a": "im2940", "b": "im2433"}, {"id": "p36", "case": "baco", "a": "im2940", "b": "im2265"}, {"id": "p37", "case": "baco", "a": "im3175", "b": "im9306"}, {"id": "p38", "case": "baco", "a": "im3879", "b": "im9306"}, {"id": "p39", "case": "baco", "a": "im3879", "b": "im3175"}, {"id": "p40", "case": "baco", "a": "im2973", "b": "im5844"}, {"id": "p41", "case": "baco", "a": "im3705", "b": "im5844"}, {"id": "p42", "case": "baco", "a": "im3705", "b": "im2973"}, {"id": "p43", "case": "baco", "a": "im5959", "b": "im6377"}, {"id": "p44", "case": "baco", "a": "im2233", "b": "im6377"}, {"id": "p45", "case": "baco", "a": "im2233", "b": "im5959"}, {"id": "p46", "case": "atenas", "a": "im2193", "b": "im3722"}, {"id": "p47", "case": "atenas", "a": "im6735", "b": "im3722"}, {"id": "p48", "case": "atenas", "a": "im6735", "b": "im2193"}, {"id": "p49", "case": "atenas", "a": "im6671", "b": "im3322"}, {"id": "p50", "case": "atenas", "a": "im5135", "b": "im3322"}, {"id": "p51", "case": "atenas", "a": "im5135", "b": "im6671"}, {"id": "p52", "case": "atenas", "a": "im8973", "b": "im7272"}, {"id": "p53", "case": "atenas", "a": "im2861", "b": "im7272"}, {"id": "p54", "case": "atenas", "a": "im2861", "b": "im8973"}, {"id": "p55", "case": "atenas", "a": "im3733", "b": "im7448"}, {"id": "p56", "case": "atenas", "a": "im9394", "b": "im7448"}, {"id": "p57", "case": "atenas", "a": "im9394", "b": "im3733"}, {"id": "p58", "case": "atenas", "a": "im6019", "b": "im8995"}, {"id": "p59", "case": "atenas", "a": "im4357", "b": "im8995"}, {"id": "p60", "case": "atenas", "a": "im4357", "b": "im6019"}], "singles": [{"id": "im3386", "case": "prato"}, {"id": "im1399", "case": "prato"}, {"id": "im4838", "case": "prato"}, {"id": "im4314", "case": "prato"}, {"id": "im4522", "case": "prato"}, {"id": "im6626", "case": "prato"}, {"id": "im5927", "case": "prato"}, {"id": "im4547", "case": "prato"}, {"id": "im6647", "case": "prato"}, {"id": "im8619", "case": "prato"}, {"id": "im1995", "case": "prato"}, {"id": "im1177", "case": "prato"}, {"id": "im6793", "case": "prato"}, {"id": "im5805", "case": "prato"}, {"id": "im5660", "case": "prato"}, {"id": "im8890", "case": "arnolfini"}, {"id": "im2939", "case": "arnolfini"}, {"id": "im9345", "case": "arnolfini"}, {"id": "im7537", "case": "arnolfini"}, {"id": "im8716", "case": "arnolfini"}, {"id": "im3825", "case": "arnolfini"}, {"id": "im3106", "case": "arnolfini"}, {"id": "im5943", "case": "arnolfini"}, {"id": "im9816", "case": "arnolfini"}, {"id": "im9879", "case": "arnolfini"}, {"id": "im3209", "case": "arnolfini"}, {"id": "im4853", "case": "arnolfini"}, {"id": "im3709", "case": "arnolfini"}, {"id": "im4178", "case": "arnolfini"}, {"id": "im9756", "case": "arnolfini"}, {"id": "im2588", "case": "baco"}, {"id": "im3064", "case": "baco"}, {"id": "im2153", "case": "baco"}, {"id": "im2265", "case": "baco"}, {"id": "im2433", "case": "baco"}, {"id": "im2940", "case": "baco"}, {"id": "im3175", "case": "baco"}, {"id": "im9306", "case": "baco"}, {"id": "im3879", "case": "baco"}, {"id": "im2973", "case": "baco"}, {"id": "im5844", "case": "baco"}, {"id": "im3705", "case": "baco"}, {"id": "im5959", "case": "baco"}, {"id": "im6377", "case": "baco"}, {"id": "im2233", "case": "baco"}, {"id": "im2193", "case": "atenas"}, {"id": "im3722", "case": "atenas"}, {"id": "im6735", "case": "atenas"}, {"id": "im6671", "case": "atenas"}, {"id": "im3322", "case": "atenas"}, {"id": "im5135", "case": "atenas"}, {"id": "im8973", "case": "atenas"}, {"id": "im7272", "case": "atenas"}, {"id": "im2861", "case": "atenas"}, {"id": "im3733", "case": "atenas"}, {"id": "im7448", "case": "atenas"}, {"id": "im9394", "case": "atenas"}, {"id": "im6019", "case": "atenas"}, {"id": "im8995", "case": "atenas"}, {"id": "im4357", "case": "atenas"}]};
+const $ = id => document.getElementById(id);
+const KEY = 'eval-ciega-v1';
+let S = null, shownAt = 0, marks = [];
+
+function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function shuffle(a, rnd) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function show(id) { for (const s of ['intro', 'p1', 'p2', 'end']) $(s).classList.toggle('hidden', s !== id); window.scrollTo(0, 0); }
+
+function begin(name) {
+  const rnd = Math.random;
+  S = { evaluator: name, started: new Date().toISOString(), userAgent: navigator.userAgent,
+        order1: shuffle(DATA.pairs.map(p => ({ id: p.id, flip: rnd() < 0.5 })), rnd),
+        order2: shuffle(DATA.singles.map(s => s.id), rnd), answers1: [], answers2: [] };
+  save();
+}
+
+function next1() {
+  const i = S.answers1.length;
+  if (i >= S.order1.length) return next2();
+  const o = S.order1[i], p = DATA.pairs.find(x => x.id === o.id);
+  const L = o.flip ? p.b : p.a, R = o.flip ? p.a : p.b;
+  $('imgL').src = 'img/' + L + '.jpg'; $('imgR').src = 'img/' + R + '.jpg';
+  $('pickL').dataset.im = L; $('pickR').dataset.im = R;
+  $('p1title').textContent = 'Parte 1 · ' + DATA.titles[p.case];
+  $('p1count').textContent = (i + 1) + ' de ' + S.order1.length; $('p1prog').value = i / S.order1.length;
+  show('p1'); shownAt = performance.now();
+}
+function answer1(choice) {
+  const o = S.order1[S.answers1.length];
+  S.answers1.push({ pair: o.id, left: $('pickL').dataset.im, right: $('pickR').dataset.im, choice,
+                    ms: Math.round(performance.now() - shownAt) });
+  save(); next1();
+}
+
+function next2() {
+  const i = S.answers2.length;
+  if (i >= S.order2.length) return finish();
+  const id = S.order2[i], s = DATA.singles.find(x => x.id === id);
+  $('imgS').src = 'img/' + id + '.jpg'; marks = []; drawMarks();
+  $('p2title').textContent = 'Parte 2 · ' + DATA.titles[s.case];
+  $('p2count').textContent = (i + 1) + ' de ' + S.order2.length; $('p2prog').value = i / S.order2.length;
+  show('p2'); shownAt = performance.now();
+}
+function drawMarks() {
+  document.querySelectorAll('.dot').forEach(d => d.remove());
+  for (const m of marks) { const d = document.createElement('div'); d.className = 'dot'; d.style.left = (m[0] * 100) + '%'; d.style.top = (m[1] * 100) + '%'; $('single').appendChild(d); }
+  $('done2').disabled = marks.length === 0;
+}
+function answer2(nothing) {
+  S.answers2.push({ image: S.order2[S.answers2.length], nothing, marks: nothing ? [] : marks,
+                    ms: Math.round(performance.now() - shownAt) });
+  save(); next2();
+}
+
+function finish() {
+  $('endsum').textContent = S.evaluator + ': respondiste ' + S.answers1.length + ' de ' + S.order1.length +
+    ' pares y ' + S.answers2.length + ' de ' + S.order2.length + ' imágenes.';
+  show('end');
+}
+function download() {
+  const out = Object.assign({}, S, { finished: new Date().toISOString() });
+  const blob = new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'respuestas__' + S.evaluator.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+$('start').onclick = () => {
+  const name = $('who').value.trim();
+  if (!name) { $('who').focus(); return; }
+  if (!S || S.evaluator !== name) begin(name);
+  S.answers1.length < S.order1.length ? next1() : next2();
+};
+$('pickL').onclick = () => answer1('left'); $('pickR').onclick = () => answer1('right');
+$('skip1').onclick = () => answer1('none'); $('to2').onclick = () => next2();
+$('single').onclick = e => { const r = $('imgS').getBoundingClientRect(); marks.push([+((e.clientX - r.left) / r.width).toFixed(4), +((e.clientY - r.top) / r.height).toFixed(4)]); drawMarks(); };
+$('done2').onclick = () => answer2(false); $('none2').onclick = () => answer2(true);
+$('clear2').onclick = () => { marks = []; drawMarks(); };
+document.querySelectorAll('.finish').forEach(b => b.onclick = finish);
+$('dl').onclick = download;
+$('back').onclick = () => S.answers1.length < S.order1.length ? next1() : next2();
+document.querySelectorAll('[data-zoom]').forEach(b => b.onclick = () => { $('zoomimg').src = $(b.dataset.zoom).src; $('zoom').showModal(); });
+$('zoom').onclick = () => $('zoom').close();
+
+S = load();
+if (S && S.evaluator) { $('who').value = S.evaluator; $('resume').textContent = 'Tenés respuestas guardadas: seguís donde dejaste.'; }
+</script>
+</body>
+</html>
