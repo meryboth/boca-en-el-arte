@@ -45,8 +45,6 @@ Máquina: Ryzen 9 4900HS, RTX 2060 Max-Q (6 GB), 15,4 GB de RAM, Windows 11. Tod
 
 El primer piloto hizo que el modelo de lenguaje dibujara una pintura "renacentista" entera por código. No era realista ni lo buscado, y el protocolo se reescribió con una pregunta más acotada: dada una pintura real, ¿quién debe cambiar la ropa?
 
-![El piloto descartado: una obra entera dibujada por código](readme/01_piloto-por-codigo.jpg)
-
 **Tres métodos** sobre el mismo archivo fuente (lado largo 4.500 px):
 
 | Condición | Quién pinta | Itera | Costo por imagen (mediana) |
